@@ -50,3 +50,5 @@
 <br>β版をRUNTEQ内リリース（MVP）：5/15〆切
 <br>本番リリース：5/26
 
+### 画面遷移図
+[figma](https://www.figma.com/file/Ei8L4672G1G0IP8oYFVh88/Yaeh!?node-id=0%3A1)
