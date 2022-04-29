@@ -52,3 +52,6 @@
 
 ### 画面遷移図
 [Figma](https://www.figma.com/file/Ei8L4672G1G0IP8oYFVh88/Yaeh!?node-id=0%3A1)
+
+### ER図
+[ER図](https://drive.google.com/file/d/1grlNs_Xap3hhtM-PeqhCK4JJ-e0Am_-Z/view?usp=sharing)
