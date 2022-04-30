@@ -1,24 +1,56 @@
-# README
+# Yaeh!(仮）
+## サービス概要
+現在存在するアプリはSNSへの共有がリンクでしか行えなかったり、有料会員じゃないと利用できないものが多い。
+<br>当日ツーリングに行く場所をしおり形式で地図の写真とともにSNSに共有し、一緒にツーリングに行くことができるサービスです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## メインのターゲットユーザー
+・バイクを所有している人
+<br>・コロナ禍になってバイク熱が再熱しており、新しくバイクに興味を持った人
 
-Things you may want to cover:
+## ユーザーが抱える課題
+・普段ツーリングしている場所に飽きてしまい新しいツーリングスポットを知りたい。
+<br>・誰かと一緒にツーリングをしたいが、なかなか一緒に行くことができない。
+<br>・ツーリング先にどれくらい人がいるか知りたい。
 
-* Ruby version
+## 解決方法
+・他のユーザーのツーリングコースを知ることで自分の新しいツーリングスポットを知る
+<br>・ツーリングプランを共有することで他の人とツーリングをしやすくする。
 
-* System dependencies
+## 実装予定の機能
+### ゲストログイン
+・過去にツーリングしたコースの共有（Twitter)
+<br>・実際にツーリングしたコース・距離の共有(Twitter)
+<br>→ツーリングしたコースの地図と距離が共有される
+<br>→走行距離の例が出る（地球一周とか）
 
-* Configuration
+### ユーザーログイン
+・ツーリングコースの共有（Twitter・LINE)
+<br>・実際にツーリングしたコース・距離の共有（Twitter,LINE)
+<br>・過去にツーリングしたコースの共有（Twitter,LINE)
+<br>・ツーリングコースの検索
+<br>・ツーリングコースのタイムライン
 
-* Database creation
+<br>・ユーザープロフィールCRUD
+<br>→ユーザー名/Email/password/バイクの種類（メーカー/排気量）/写真/走行距離（メーターで表示）
+<br>・ユーザー投稿のツーリングコースCRUD
+<br>・お気に入り登録
+<br>・グッド登録
+<br>・コメントCRUD
 
-* Database initialization
+### 追加機能
+・各ツーリングスポットに行く予定の人や、今いる人の多さがアイコンで分かるようにしたい
+<br>→人数に合わせてスタンプが変わる仕様にする
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+▼スケジュール例
+企画〜技術調査：4/13 〆切
+<br>ツーリングコースの経路作成・ツーリングコースの距離計測・地図/ルートをSNSに投稿方法
+<br>README〜ER図作成：4/17 〆切
+<br>β版をRUNTEQ内リリース（MVP）：5/15〆切
+<br>本番リリース：5/26
 
-* Deployment instructions
+### 画面遷移図
+[Figma](https://www.figma.com/file/Ei8L4672G1G0IP8oYFVh88/Yaeh!?node-id=0%3A1)
 
-* ...
+### ER図
+[ER図](https://drive.google.com/file/d/1grlNs_Xap3hhtM-PeqhCK4JJ-e0Am_-Z/view?usp=sharing)
