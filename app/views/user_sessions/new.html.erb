@@ -20,7 +20,8 @@
         <% end %>
       <div class='text-center'>
         <%= link_to '登録ページへ', new_user_path %>
-        <a href="#">パスワードをお忘れの方はこちら</a>
+        <%= link_to "ゲストログイン", guest_login_path, method: :post %>
+        <a href="#">パスワードリセット</a>
       </div>
     </div>
   </div>

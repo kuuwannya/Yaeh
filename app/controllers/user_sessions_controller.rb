@@ -1,17 +1,29 @@
 class UserSessionsController < ApplicationController
+  before_action :require_login, only: :destroy
   def new; end
 
   def create
     @user = login(params[:email], params[:password])
     if @user
-      redirect_back_or_to root_path
+      redirect_back_or_to root_path, success: "ログインしました"
     else
+      flash.now[:danger] = "ログインできませんでした"
       render :new
     end
   end
 
   def destroy
     logout
-    redirect_to root_path
+    redirect_to root_path, success: "ログアウトしました"
+    current_user.destroy! if current_user.guest?
+  end
+
+  def guest_login
+    redirect_to login_path, warnig: "すでにログインしています" if current_user # ログインしてる場合はユーザーを作成しない
+
+    random_value = SecureRandom.hex
+    user = User.create!(name: "Guest", email: "test_#{random_value}@example.com", password: random_value, password_confirmation: random_value, role: :guest)
+    auto_login(user)
+    redirect_to root_path, success: "ゲストとしてログインしました"
   end
 end
