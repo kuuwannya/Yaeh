@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     else
       flash.now[:danger] = "ユーザーを更新できませんでした"
       render :edit
+    end
   end
 
   def destroy
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache :profile)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache, :profile)
     end
 
     def user_find
