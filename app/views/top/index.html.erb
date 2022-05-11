@@ -1,20 +1,79 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
+<p><button onclick="getMyPlace()">現在位置を取得</button></p>
+<div id="result"></div>
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 35.6811673, lng: 139.7670516},
+      scrollwheel: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeControl: false,
+      gestureHandling: 'greedy',
+      zoom: 13,
+      styles: [
+              {
+                featureType: 'all',
+                elementType: 'all',
+              },
+              {
+                featureType: 'poi',
+                elementType: 'all',
+                stylers: [
+                  {visibility: 'off'},
+                ],
+              }
+      ]
+  });
 
-<h1>Users</h1>
-<table class="table table-hover">
+  document.getElementById('lat').value = lat;
+  document.getElementById('lng').value = lng;
+}
+
+function getMyPlace() {
+  var output = document.getElementById("result");
+  if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
+    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+    return;
+  }
+  function success(position) {
+    var latitude  = position.coords.latitude;//緯度
+    var longitude = position.coords.longitude;//経度
+    // 位置情報
+    var latlng = new google.maps.LatLng( latitude , longitude ) ;
+    // Google Mapsに書き出し
+    var map = new google.maps.Map( document.getElementById( 'map' ) , {
+        zoom: 13 ,// ズーム値
+        center: latlng ,// 中心座標
+    } ) ;
+    // マーカーの新規出力
+    new google.maps.Marker( {
+        map: map ,
+        position: latlng ,
+    } ) ;
+  };
+  function error() {
+    //エラーの場合
+    output.innerHTML = "座標位置を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
+}
+</script>
+
+
+<div class="container">
+  <h1>Users</h1>
+  <table class="table table-hover">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Address</th>
       <th scope="col">Phone</th>
       <th colspan="3"></th>
     </tr>
+  </table>
+  <br>
 
-
-  </tbody>
-</table>
-<br>
-
-<%= link_to 'New User', root_path, class: 'btn btn-primary btn-sm' %>
+  <%= link_to 'New User', root_path, class: 'btn btn-primary btn-sm' %>
 
 </div>
