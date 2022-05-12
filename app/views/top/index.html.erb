@@ -1,20 +1,14 @@
-<p id="notice"><%= notice %></p>
-<div class="container">
-
-<h1>Users</h1>
-<table class="table table-hover">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">Phone</th>
-      <th colspan="3"></th>
-    </tr>
-
-
-  </tbody>
-</table>
-<br>
-
-<%= link_to 'New User', root_path, class: 'btn btn-primary btn-sm' %>
-
-</div>
+<%= javascript_pack_tag 'google_map' %>
+<input
+      id="pac-input"
+      class="controls"
+      type="text"
+      placeholder="キーワード検索"
+    />
+  
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<%= form_with scope: :q, url: "#", method: :get do |f| %>
+  <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
+  <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
+  <%= f.submit 'ツーリングスポットを探す', class: 'text-white bg-main-blue rounded-full hover:bg-dark-blue font-semibold text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-md cursor-pointer' %>
+<% end %>

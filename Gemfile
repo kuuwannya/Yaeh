@@ -28,6 +28,7 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 gem 'pry-rails'
 gem 'rails-i18n'
+gem 'gon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

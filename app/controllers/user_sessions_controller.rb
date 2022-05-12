@@ -6,7 +6,6 @@ class UserSessionsController < ApplicationController
     @user = login(params[:email], params[:password])
     if @user
       redirect_back_or_to root_path, success: "ログインしました"
-      binding.pry
     else
       flash.now[:danger] = "ログインできませんでした"
       render :new
@@ -14,9 +13,9 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+    current_user.destroy! if current_user.guest?
     logout
     redirect_to root_path, success: "ログアウトしました"
-    #current_user.destroy! if current_user.guest?
   end
 
   def guest_login
