@@ -1,11 +1,11 @@
-<%= javascript_pack_tag 'google_map' %>
+<%= javascript_pack_tag 'google_map_route' %>
 <input
       id="pac-input"
       class="controls"
       type="text"
       placeholder="キーワード検索"
     />
-<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<div id="map"></div>
 <%= form_with scope: :q, url: "#", method: :get do |f| %>
   <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
   <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>

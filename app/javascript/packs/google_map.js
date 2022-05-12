@@ -1,31 +1,28 @@
-<script>
 var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
-
 function initMap() {
-  // 地図初期化
   var map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: lat, lng: lng },
-      scrollwheel: false,
-      streetViewControl: false,
-      fullscreenControl: false,
-      mapTypeControl: false,
-      gestureHandling: 'greedy',
-      zoom: 13,
-      styles: [
-              {
-                featureType: 'all',
-                elementType: 'all',
-              },
-              {
-                featureType: 'poi',
-                elementType: 'all',
-                stylers: [
-                  {visibility: 'off'},
-                ],
-              }
-      ]
+    center: { lat: lat, lng: lng },
+    scrollwheel: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeControl: false,
+    gestureHandling: 'greedy',
+    zoom: 13,
+    styles: [
+      {
+        featureType: 'all',
+        elementType: 'all',
+      },
+      {
+        featureType: 'poi',
+        elementType: 'all',
+        stylers: [
+          { visibility: 'off' },
+        ],
+      }
+    ]
   });
 
   document.getElementById('lat').value = lat;
@@ -35,14 +32,12 @@ function initMap() {
   pin = new google.maps.Marker({
     map: map,
     position: new google.maps.LatLng(lat, lng),
-
-    icon:{
-      url: '/assets/images/bike_icon.jpg'
-    }
+    animation: google.maps.Animation.BOUNCE,
+    icon: '/assets/bike_icon.png'
   });
-
+  console.log(pin.icon);
   // ピンの移動
-  map.addListener('click', function(e){
+  map.addListener('click', function (e) {
     clickMap(e.latLng, map);
   });
 
@@ -75,6 +70,7 @@ function initMap() {
             '位置情報の取得に時間がかかり過ぎてタイムアウトしました'
           ];
           var errorNum = error.code;
+
           var errorMessage = errorInfo[errorNum]
 
           alert(errorMessage);
@@ -85,7 +81,7 @@ function initMap() {
     }
   });
 
-// 検索ボックス
+  // 検索ボックス
   const input = document.getElementById("pac-input");
   const searchBox = new google.maps.places.SearchBox(input);
   // 左側に設置
@@ -94,19 +90,12 @@ function initMap() {
     searchBox.setBounds(map.getBounds());
   });
 
-  let markers: google.maps.Marker[] = [];
-
   searchBox.addListener("places_changed", () => {
     const places = searchBox.getPlaces();
 
     if (places.length == 0) {
       return;
     }
-    // Clear out the old markers.
-    markers.forEach((marker) => {
-      marker.setMap(null);
-    });
-    markers = [];
 
     const bounds = new google.maps.LatLngBounds();
 
@@ -115,24 +104,6 @@ function initMap() {
         console.log("検索結果がありませんでした。");
         return;
       }
-
-      const icon = {
-        url: place.icon as string,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25),
-      };
-
-      // Create a marker for each place.
-      markers.push(
-        new google.maps.Marker({
-          map,
-          icon,
-          title: place.name,
-          position: place.geometry.location,
-        })
-      );
 
       if (place.geometry.viewport) {
         // Only geocodes have viewport.
@@ -144,11 +115,31 @@ function initMap() {
     map.fitBounds(bounds);
   });
 }
-  declare global {
-  interface Window {
-    initMap: () => void;
-  }
-}
 window.initMap = initMap;
-export {};
-</script>
+
+clickMap = (lat_lng, map) => {
+  lat = lat_lng.lat();
+  lng = lat_lng.lng();
+
+  lat = Math.floor(lat * 10000000) / 10000000;
+  lng = Math.floor(lng * 10000000) / 10000000;
+
+  //座標をhidden formに入力する
+  document.getElementById('lat').value = lat;
+  document.getElementById('lng').value = lng;
+
+  //中心に移動
+  map.panTo(lat_lng);
+
+  // マーカーの更新
+  updatePin(lat_lng, map);
+}
+
+updatePin = (pos, map) => {
+  pin.setMap(null);
+  pin = null;
+  pin = new google.maps.Marker({
+    position: pos,
+    map: map
+  });
+}

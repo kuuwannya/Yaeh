@@ -19,6 +19,26 @@ class TopController < ApplicationController
     end
   end
 
+  def user
+    search_radius = 1.5
+    default_lat = 35.6811673
+    default_lng = 139.7670516
+    if params[:q]
+      @latitude = geo_params[:latitude].to_f
+      @longitude = geo_params[:longitude].to_f
+      @jiros = Jiro.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
+      @saunas = Sauna.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
+      @area = search_area(@latitude, @longitude)
+      gon.latitude = @latitude
+      gon.longitude = @longitude
+      gon.jiros = @jiros
+      gon.saunas = @saunas
+    else
+      gon.latitude = default_lat
+      gon.longitude = default_lng
+    end
+  end
+
   private
 
   def geo_params

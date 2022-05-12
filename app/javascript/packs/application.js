@@ -8,6 +8,5 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "bootstrap"
 import "../stylesheets/application"
-import "../map/google_map"
 Rails.start()
 ActiveStorage.start()

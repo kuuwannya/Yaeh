@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :user_find, only: %i[show edit update destroy]
+  skip_before_action :require_login, only: [:new, :create]
   def new
     @user = User.new
   end
