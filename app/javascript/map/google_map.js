@@ -1,7 +1,9 @@
-
+var pin = null;
+var lat = gon.latitude;
+var lng = gon.longitude;
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 35.6811673, lng: 139.7670516 },
+    center: { lat: lat, lng: lng },
     scrollwheel: false,
     streetViewControl: false,
     fullscreenControl: false,
@@ -23,15 +25,19 @@ function initMap() {
     ]
   });
 
-  // ピンの移動
-  map.addListener('click', function (e) {
-    clickMap(e.latLng, map);
-  });
+  document.getElementById('lat').value = lat;
+  document.getElementById('lng').value = lng;
+
   // 初期ピン
   pin = new google.maps.Marker({
     map: map,
-    position: new google.maps.LatLng(35.6811673, 139.7670516),
+    position: new google.maps.LatLng(lat, lng),
     animation: google.maps.Animation.BOUNCE
+  });
+
+  // ピンの移動
+  map.addListener('click', function (e) {
+    clickMap(e.latLng, map);
   });
 
   // 現在地へ移動ボタン
@@ -51,8 +57,6 @@ function initMap() {
           map.setCenter(pos);
           // pinを更新
           updatePin(pos, map);
-          // サークルを更新
-          updateCircle(pos.lat, pos.lng, map);
           // フォームに値を入れる
           document.getElementById('lat').value = pos.lat;
           document.getElementById('lng').value = pos.lng;
@@ -75,95 +79,6 @@ function initMap() {
       window.alert('お使いの端末では対応しておりません...。');
     }
   });
-  // 検索ボックス
-  const input = document.getElementById("pac-input");
-  const searchBox = new google.maps.places.SearchBox(input);
-  // 左側に設置
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  map.addListener("bounds_changed", () => {
-    searchBox.setBounds(map.getBounds());
-  });
-
-  let markers = google.maps.Marker = [];
-
-  searchBox.addListener("places_changed", () => {
-    const places = searchBox.getPlaces();
-
-    if (places.length == 0) {
-      return;
-    }
-    // Clear out the old markers.
-    markers.forEach((marker) => {
-      marker.setMap(null);
-    });
-    markers = [];
-
-    const bounds = new google.maps.LatLngBounds();
-
-    places.forEach((place) => {
-      if (!place.geometry || !place.geometry.location) {
-        console.log("検索結果がありませんでした。");
-        return;
-      }
-
-      const icon = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25),
-      };
-
-      // Create a marker for each place.
-      markers.push(
-        new google.maps.Marker({
-          map,
-          icon,
-          title: place.name,
-          position: place.geometry.location,
-        })
-      );
-
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
-  });
-}
-window.initMap = initMap;
-
-function getMyPlace() {
-  var output = document.getElementById("result");
-  if (!navigator.geolocation) {//Geolocation apiがサポートされていない場合
-    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
-    return;
-  }
-  function success(position) {
-    var latitude = position.coords.latitude;//緯度
-    var longitude = position.coords.longitude;//経度
-    // 位置情報
-    var latlng = new google.maps.LatLng(latitude, longitude);
-    // Google Mapsに書き出し
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 13,// ズーム値
-      center: latlng,// 中心座標
-    });
-    // マーカーの新規出力
-    new google.maps.Marker({
-      map: map,
-      position: latlng,
-      animation: google.maps.Animation.BOUNCE
-    });
-  };
-  function error() {
-    //エラーの場合
-    output.innerHTML = "座標位置を取得できません";
-  };
-  navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
 
   // 検索ボックス
   const input = document.getElementById("pac-input");
@@ -197,8 +112,33 @@ function getMyPlace() {
       }
     });
     map.fitBounds(bounds);
-    var zoom = map.getZoom();
-    map.setZoom(zoom > 13 ? 13 : zoom);
   });
 }
 window.initMap = initMap;
+
+clickMap = (lat_lng, map) => {
+  lat = lat_lng.lat();
+  lng = lat_lng.lng();
+
+  lat = Math.floor(lat * 10000000) / 10000000;
+  lng = Math.floor(lng * 10000000) / 10000000;
+
+  //座標をhidden formに入力する
+  document.getElementById('lat').value = lat;
+  document.getElementById('lng').value = lng;
+
+  //中心に移動
+  map.panTo(lat_lng);
+
+  // マーカーの更新
+  updatePin(lat_lng, map);
+}
+
+updatePin = (pos, map) => {
+  pin.setMap(null);
+  pin = null;
+  pin = new google.maps.Marker({
+    position: pos,
+    map: map
+  });
+}
