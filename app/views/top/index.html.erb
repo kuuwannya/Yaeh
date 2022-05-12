@@ -5,6 +5,7 @@
       type="text"
       placeholder="キーワード検索"
     />
+  
 <div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
 <%= form_with scope: :q, url: "#", method: :get do |f| %>
   <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
