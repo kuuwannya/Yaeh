@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
+
+  has_many :spots
+
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true, length: { maximum: 255}
 

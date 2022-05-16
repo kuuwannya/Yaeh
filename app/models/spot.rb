@@ -1,4 +1,6 @@
 class Spot < ApplicationRecord
+  belongs_to :user
+
   validates :name, presence: true, uniqueness: true
   validates :longitude, presence: true
   validates :latitude, presence: true
