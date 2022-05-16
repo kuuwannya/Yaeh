@@ -1,0 +1,26 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <h1></h1>
+      <!-- スポット内容 -->
+      <article class="card">
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-md-3'>
+              <%#= image_tag @board.board_image.url, class: 'card-img-top img-fluid', size: '300x200' %>
+            </div>
+            <div class='col-md-9'>
+              <h3 style='display: inline;'><%= @spot.name %></h3>
+            </div>
+          </div>
+          <p><%= @spot.address %></p>
+          <p><%= @spot.opening_at %></p>
+          <p><%= @spot.tel_number %></p>
+          <p><%= @spot.rating %></p>
+          <p><%= @spot.spot_parking %></p>
+          <p><%= @spot.spot_parking_price %></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

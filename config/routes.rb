@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post "guest_login", to: "user_sessions#guest_login"
   delete "logout", to: "user_sessions#destroy"
   resources :users
+  resources :spots
 end

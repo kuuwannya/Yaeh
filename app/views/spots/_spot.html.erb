@@ -1,0 +1,16 @@
+<div class="col-sm-12 col-lg-4 mb-3">
+  <div id="board-id-<%= spot.id %>">
+    <div class="card">
+      <%#= image_tag 'board_placeholder.png', class: 'card-img-top', size: '300x200' %>
+      <div class="card-body">
+        <h4 class="card-title">
+          <%= link_to spot.name, spot_path(spot) %>
+        </h4>
+        <div class='mr10 float-right'>
+          <a href="#"><%#= icon 'fa', 'pen' %></a>
+        </div>
+        <p class="card-text"><%= spot.address %></p>
+      </div>
+    </div>
+  </div>
+</div>
