@@ -1,6 +1,7 @@
 var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: lat, lng: lng },
@@ -141,4 +142,90 @@ updatePin = (pos, map) => {
     position: pos,
     map: map
   });
+}
+
+var begin, end;
+var directionsDisplay;
+var directionsService;
+
+$(function () {
+  $('#getRoute').click(function (e) {
+    e.preventDefault();         // hrefが無効になり、画面遷移が行わない
+
+    begin = $('#data-start-point-name').val();
+    end = $('#data-destination-name').val();
+    google.maps.event.addDomListener(window, 'load', initialize(begin, end));
+    google.maps.event.addDomListener(window, 'load', calcRoute(begin, end));
+  });
+});
+
+function initialize(begin, end) {
+  // インスタンス[geocoder]作成
+  var geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({
+    // 起点のキーワード
+    'address': begin
+
+  }, function (result, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      // 中心点を指定
+      var latlng = result[0].geometry.location;
+
+      // オプション
+      var myOptions = {
+        zoom: 14,
+        center: latlng,
+        scrollwheel: false,     // ホイールでの拡大・縮小
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      let rendererOptions = {
+        map,
+        draggable: true,
+        suppressMarkers: false
+      };
+
+      // #map_canvasを取得し、[mapOptions]の内容の、地図のインスタンス([map])を作成する
+      map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+      // 経路を取得
+      directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+      directionsDisplay.setMap(map);
+
+      // 場所
+      $('#data-start-point-name').text(begin);
+      $('#data-destination-name').text(end);
+
+    } else {
+      alert('取得できませんでした…');
+    }
+  });
+}
+
+// ルート取得
+function calcRoute(begin, end) {
+
+  var request = {
+    origin: begin,         // 開始地点
+    destination: end,      // 終了地点
+    travelMode: google.maps.TravelMode.DRIVING,     // [自動車]でのルート
+    unitSystem: google.maps.DirectionsUnitSystem.METRIC,
+    optimizeWaypoints: true,
+    avoidHighways: true,
+    avoidTolls: false
+  };
+
+  // インスタンス作成
+  directionsService = new google.maps.DirectionsService();
+
+  directionsService.route(request, function (response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      directionsRenderer.setMap(map);
+    } else {
+      alert('ルートが見つかりませんでした…');
+    }
+  });
+
 }
