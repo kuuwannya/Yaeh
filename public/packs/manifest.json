@@ -20,23 +20,33 @@
     },
     "google_map_route": {
       "js": [
-        "/packs/js/google_map_route-b3a8f2b97e44f85f8708.js"
+        "/packs/js/google_map_route-6a6baabc5da0a04669c2.js"
       ],
       "js.map": [
-        "/packs/js/google_map_route-b3a8f2b97e44f85f8708.js.map"
+        "/packs/js/google_map_route-6a6baabc5da0a04669c2.js.map"
       ]
     },
     "google_map": {
       "js": [
-        "/packs/js/google_map-ff1d973fd5e1747e87c9.js"
+        "/packs/js/google_map-e5a25da82cb2520e1203.js"
       ],
       "js.map": [
-        "/packs/js/google_map-ff1d973fd5e1747e87c9.js.map"
+        "/packs/js/google_map-e5a25da82cb2520e1203.js.map"
+      ]
+    },
+    "spot_google_map": {
+      "js": [
+        "/packs/js/spot_google_map-ef4b7dcbef10d6e1a4f4.js"
+      ],
+      "js.map": [
+        "/packs/js/spot_google_map-ef4b7dcbef10d6e1a4f4.js.map"
       ]
     }
   },
-  "google_map.js": "/packs/js/google_map-ff1d973fd5e1747e87c9.js",
-  "google_map.js.map": "/packs/js/google_map-ff1d973fd5e1747e87c9.js.map",
-  "google_map_route.js": "/packs/js/google_map_route-b3a8f2b97e44f85f8708.js",
-  "google_map_route.js.map": "/packs/js/google_map_route-b3a8f2b97e44f85f8708.js.map"
+  "google_map.js": "/packs/js/google_map-e5a25da82cb2520e1203.js",
+  "google_map.js.map": "/packs/js/google_map-e5a25da82cb2520e1203.js.map",
+  "google_map_route.js": "/packs/js/google_map_route-6a6baabc5da0a04669c2.js",
+  "google_map_route.js.map": "/packs/js/google_map_route-6a6baabc5da0a04669c2.js.map",
+  "spot_google_map.js": "/packs/js/spot_google_map-ef4b7dcbef10d6e1a4f4.js",
+  "spot_google_map.js.map": "/packs/js/spot_google_map-ef4b7dcbef10d6e1a4f4.js.map"
 }

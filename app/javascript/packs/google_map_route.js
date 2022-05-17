@@ -228,4 +228,15 @@ function calcRoute(begin, end) {
     }
   });
 
+  updateStart = (pos, map) => {
+    pin.setMap(null);
+    pin = null;
+    pin = new google.maps.Marker({
+      position: pos,
+      map: map,
+      animation: google.maps.Animation.BOUNCE,
+      icon: '/assets/bike_icon.png'
+    });
+  }
+
 }

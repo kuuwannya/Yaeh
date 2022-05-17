@@ -1,6 +1,9 @@
 var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
+var spotMarker = [];
+
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: lat, lng: lng },
@@ -25,6 +28,18 @@ function initMap() {
     ]
   });
 
+  circle = new google.maps.Circle({
+    center: new google.maps.LatLng(lat, lng),
+    map: map,
+    radius: 1500,
+    clickable: false,
+    fillColor: '#297EDD',
+    fillOpacity: 0.1,
+    strokeColor: '#297EDD',
+    strokeOpacity: 0.6,
+    strokeWeight: 0.7,
+  });
+
   document.getElementById('lat').value = lat;
   document.getElementById('lng').value = lng;
 
@@ -35,7 +50,33 @@ function initMap() {
     animation: google.maps.Animation.BOUNCE,
     icon: '/assets/bike_icon.png'
   });
-  console.log(pin.icon);
+
+
+  if (gon.spots) {
+
+    for (let i = 0; i < gon.spots.length; i++) {
+
+      // 検索結果のジローの座標取得
+      markerLatLng = new google.maps.LatLng({
+        lat: parseFloat(gon.spots[i]['latitude']),
+        lng: parseFloat(gon.spots[i]['longitude'])
+      });
+
+      // マーカーの作成
+      spotsMarker[i] = new google.maps.Marker({
+        position: markerLatLng,
+        map: map,
+        icon: {
+          scaledSize: new google.maps.Size(30, 46)
+        },
+        animation: google.maps.Animation.DROP
+      });
+      spotMarker[i].addListener('click', () => {
+        location.hash = `#spot-${gon.spot[i]['id']}`;
+      });
+    }
+  }
+
   // ピンの移動
   map.addListener('click', function (e) {
     clickMap(e.latLng, map);
