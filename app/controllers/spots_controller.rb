@@ -11,8 +11,8 @@ class SpotsController < ApplicationController
     gon.center_of_map_lng = @spot.longitude
     gon.zoom_level_of_map = 17
     gon.spots_on_map = Spot.all
-    gon.spot_lat = @spot.latitude
-    gon.spot_lng = @spot.longitude
+    @longtitude = @spot.latitude
+    @latitude = @spot.longitude
     gon.spot_id = @spot.id
   end
 

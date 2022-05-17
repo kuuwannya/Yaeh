@@ -84,7 +84,6 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.2)
     ffi (1.15.5)
-    geocoder (1.7.5)
     geokit (1.13.1)
     geokit-rails (2.3.2)
       geokit (~> 1.5)
@@ -278,7 +277,6 @@ DEPENDENCIES
   byebug
   cancancan
   dotenv-rails
-  geocoder
   geokit-rails
   gon
   google_places

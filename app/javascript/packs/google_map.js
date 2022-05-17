@@ -56,19 +56,16 @@ function initMap() {
 
     for (let i = 0; i < gon.spots.length; i++) {
 
-      // 検索結果のジローの座標取得
+      // 検索結果のスポットの座標取得
       markerLatLng = new google.maps.LatLng({
         lat: parseFloat(gon.spots[i]['latitude']),
         lng: parseFloat(gon.spots[i]['longitude'])
       });
 
       // マーカーの作成
-      spotsMarker[i] = new google.maps.Marker({
+      spotMarker[i] = new google.maps.Marker({
         position: markerLatLng,
         map: map,
-        icon: {
-          scaledSize: new google.maps.Size(30, 46)
-        },
         animation: google.maps.Animation.DROP
       });
       spotMarker[i].addListener('click', () => {

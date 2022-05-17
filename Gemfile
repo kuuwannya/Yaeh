@@ -32,7 +32,6 @@ gem 'gon'
 gem 'pg'
 gem 'dotenv-rails'
 gem 'google_places'
-gem 'geocoder'
 gem 'geokit-rails'
 gem 'rexml', '~> 3.2', '>= 3.2.4'
 
