@@ -28,18 +28,6 @@ function initMap() {
     ]
   });
 
-  circle = new google.maps.Circle({
-    center: new google.maps.LatLng(lat, lng),
-    map: map,
-    radius: 1500,
-    clickable: false,
-    fillColor: '#297EDD',
-    fillOpacity: 0.1,
-    strokeColor: '#297EDD',
-    strokeOpacity: 0.6,
-    strokeWeight: 0.7,
-  });
-
   document.getElementById('lat').value = lat;
   document.getElementById('lng').value = lng;
 
