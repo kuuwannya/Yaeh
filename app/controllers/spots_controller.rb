@@ -6,7 +6,15 @@ class SpotsController < ApplicationController
     @spots = Spot.all.includes(:user).order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    gon.center_of_map_lat = @spot.latitude
+    gon.center_of_map_lng = @spot.longitude
+    gon.zoom_level_of_map = 17
+    gon.spots_on_map = Spot.all
+    gon.spot_lat = @spot.latitude
+    gon.spot_lng = @spot.longitude
+    gon.spot_id = @spot.id
+  end
 
   def new
     @spot = Spot.new
