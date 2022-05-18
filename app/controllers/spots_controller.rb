@@ -17,11 +17,11 @@ class SpotsController < ApplicationController
   end
 
   def new
-    @spot = Spot.new
+    @spot = Spot.new(spot_lat_lng)
   end
 
   def create
-    @spot = current_user.spots.new(spot_params)
+    @spot = current_user.spots.create(spot_params)
     if @spot.save
       redirect_to spots_path
     else
@@ -47,5 +47,9 @@ class SpotsController < ApplicationController
 
   def spot_find
       @spot = Spot.find(params[:id])
-    end
+  end
+
+  def spot_params
+    params.require(:spot).permit(:name, :address, :spot_parking, :spot_parking_price)
+  end
 end

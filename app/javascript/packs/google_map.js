@@ -58,6 +58,11 @@ function initMap() {
       });
       spotMarker[i].addListener('click', () => {
         location.hash = `#spot-${gon.spot[i]['id']}`;
+        if (currentInfoWindow) {
+          currentInfoWindow.close();
+        }
+        windows[i].open(map, marker[i]); // 吹き出しの表示
+        currentInfoWindow = windows[i];
       });
     }
   }
@@ -65,6 +70,12 @@ function initMap() {
   // ピンの移動
   map.addListener('click', function (e) {
     clickMap(e.latLng, map);
+  });
+
+  $(function () {
+    $('.lat').on('submit', function () {
+      console.log("キーボードを入力した時に発生");
+    })
   });
 
   // 現在地へ移動ボタン
@@ -146,9 +157,6 @@ window.initMap = initMap;
 clickMap = (lat_lng, map) => {
   lat = lat_lng.lat();
   lng = lat_lng.lng();
-
-  lat = Math.floor(lat * 10000000) / 10000000;
-  lng = Math.floor(lng * 10000000) / 10000000;
 
   //座標をhidden formに入力する
   document.getElementById('lat').value = lat;

@@ -13,5 +13,11 @@
   <%= f.submit 'ツーリングスポットを探す', class: 'text-white bg-main-blue rounded-full hover:bg-dark-blue font-semibold text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-md cursor-pointer' %>
 <% end %>
 
+<%= form_with model: @map, url: new_spot_path, method: :get do |f| %>
+  <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
+  <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
+  <%= f.submit 'ツーリングスポット作成', class: 'text-white bg-main-blue rounded-full hover:bg-dark-blue font-semibold text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-md cursor-pointer' %>
+<% end %>
+
 <%= link_to 'Twitter', "https://twitter.com/share?text=今日は宮ヶ瀬に行きます！&url=#{request.url}&hashtags=バイク好きと繋がりたい,Yaeh" %>
 <%= link_to 'Line', "https://timeline.line.me/social-plugin/share?text=今日は宮ヶ瀬に行く!&url=#{request.url}" %>
