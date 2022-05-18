@@ -1,6 +1,9 @@
 var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
+var spotMarker = [];
+
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: lat, lng: lng },
@@ -35,10 +38,44 @@ function initMap() {
     animation: google.maps.Animation.BOUNCE,
     icon: '/assets/bike_icon.png'
   });
-  console.log(pin.icon);
+
+
+  if (gon.spots) {
+
+    for (let i = 0; i < gon.spots.length; i++) {
+
+      // 検索結果のスポットの座標取得
+      markerLatLng = new google.maps.LatLng({
+        lat: parseFloat(gon.spots[i]['latitude']),
+        lng: parseFloat(gon.spots[i]['longitude'])
+      });
+
+      // マーカーの作成
+      spotMarker[i] = new google.maps.Marker({
+        position: markerLatLng,
+        map: map,
+        animation: google.maps.Animation.DROP
+      });
+      spotMarker[i].addListener('click', () => {
+        location.hash = `#spot-${gon.spot[i]['id']}`;
+        if (currentInfoWindow) {
+          currentInfoWindow.close();
+        }
+        windows[i].open(map, marker[i]); // 吹き出しの表示
+        currentInfoWindow = windows[i];
+      });
+    }
+  }
+
   // ピンの移動
   map.addListener('click', function (e) {
     clickMap(e.latLng, map);
+  });
+
+  $(function () {
+    $('.lat').on('submit', function () {
+      console.log("キーボードを入力した時に発生");
+    })
   });
 
   // 現在地へ移動ボタン
@@ -120,9 +157,6 @@ window.initMap = initMap;
 clickMap = (lat_lng, map) => {
   lat = lat_lng.lat();
   lng = lat_lng.lng();
-
-  lat = Math.floor(lat * 10000000) / 10000000;
-  lng = Math.floor(lng * 10000000) / 10000000;
 
   //座標をhidden formに入力する
   document.getElementById('lat').value = lat;
