@@ -11,7 +11,7 @@ class MapsController < ApplicationController
     if params[:q]
       @latitude = geo_params[:latitude].to_f
       @longitude = geo_params[:longitude].to_f
-      @spots = Spot.all.within(search_radius, origin: [@latitude, @longitude])
+      @spots = Spot.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
       @area = search_area(@latitude, @longitude)
       gon.latitude = @latitude
       gon.longitude = @longitude
