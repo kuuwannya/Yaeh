@@ -285,11 +285,7 @@ DEPENDENCIES
   byebug
   cancancan
   dotenv-rails
-<<<<<<< HEAD
   font-awesome-sass (~> 5.11.2)
-=======
-  font-awesome-sass
->>>>>>> 5ff359b7f2eaba869aa1e43eae9bae0e157b10c0
   geokit-rails
   gon
   google_places
