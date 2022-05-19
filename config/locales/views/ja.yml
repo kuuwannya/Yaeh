@@ -1,0 +1,42 @@
+ja:
+  users:
+    new:
+      title: 'ユーザー登録'
+      link: 'ログインページへ'
+    create:
+      success: 'ユーザー登録が完了しました'
+      fail: 'ユーザー登録に失敗しました'
+    update:
+      success: 'ユーザーを更新しました'
+      fail: 'ユーザーを更新できませんでした'
+    destroy:
+      success: 'ユーザーを削除しました'
+  user_sessions:
+    new:
+      login: 'ログイン'
+      logout: 'ログアウト'
+      link_user_create: '登録ページへ'
+      link_password: 'パスワードお忘れの方はこちら'
+    create:
+      success: 'ログインしました'
+      fail: 'ログインに失敗しました'
+    destroy:
+      success: 'ログアウトしました'
+  posts:
+    create:
+      success: '投稿しました'
+      fail: '投稿に失敗しました'
+    update:
+      success: '投稿を更新しました'
+      fail: '投稿の更新ができませんでした'
+    destroy:
+      success: '投稿を削除しました'
+  spots:
+    create:
+      success: 'スポットを登録しました'
+      fail: 'スポットの登録に失敗しました'
+    update:
+      success: 'スポットを更新しました'
+      fail: 'スポットの更新ができませんでした'
+    destroy:
+      success: 'スポットを削除しました'

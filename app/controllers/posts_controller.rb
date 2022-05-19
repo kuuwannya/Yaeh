@@ -12,8 +12,9 @@ before_action :find_post, only: [:edit, :update, :destroy]
     @post = current_user.posts.new(post_params)
     @spots = @post.spots
     if @post.save
-      redirect_to posts_path
+      redirect_to posts_path, success: t('.success')
     else
+      flash.now['danger'] = t('.fail')
       render :new
     end
   end
@@ -26,16 +27,16 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   def update
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to @post, success: t('.success')
     else
-      #flash.now['danger'] = t('defaults.message.not_updated', item: Board.model_name.human)
+      flash.now['danger'] = t('.fail')
       render :edit
     end
   end
 
   def destroy
     @board.destroy!
-    redirect_to posts_path
+    redirect_to posts_path, success: t('.success')
   end
 
   private
