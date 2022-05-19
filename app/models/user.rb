@@ -2,6 +2,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   has_many :spots
+  has_many :posts
 
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true, length: { maximum: 255}
@@ -11,4 +12,8 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
   enum role: { general:0, admin:1, guest:2 }
+
+  def own?(object)
+    object.user_id == id
+  end
 end
