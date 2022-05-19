@@ -84,8 +84,13 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.2)
     ffi (1.15.5)
+<<<<<<< HEAD
     font-awesome-sass (5.11.2)
       sassc (>= 1.11)
+=======
+    font-awesome-sass (6.1.1)
+      sassc (~> 2.0)
+>>>>>>> 5ff359b7f2eaba869aa1e43eae9bae0e157b10c0
     geokit (1.13.1)
     geokit-rails (2.3.2)
       geokit (~> 1.5)
@@ -285,7 +290,11 @@ DEPENDENCIES
   byebug
   cancancan
   dotenv-rails
+<<<<<<< HEAD
   font-awesome-sass (~> 5.11.2)
+=======
+  font-awesome-sass
+>>>>>>> 5ff359b7f2eaba869aa1e43eae9bae0e157b10c0
   geokit-rails
   gon
   google_places
