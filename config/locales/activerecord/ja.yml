@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    models:
+      user: 'ユーザー'
+      board: '投稿'
+    attributes:
+      user:
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード確認'
+        name: '名前'
+        profile: '自己紹介'
+      post:
+        content: '本文'
+        route_image: 'ルート'
+        route_total_distance: '距離'
+        route_gas_mileage: '燃費'
+        touring_date: 'ツーリング日'
+      spot:
+        name: '名称'
+        longitude: '経度'
+        latitude: '緯度'
+        image: '画像'
+        address: '住所'
+        prefecture: '都道府県'
+        opening_at: '営業日'
+        regular_holiday: '定休日'
+        tel_number: '電話番号'
+        rating: '評価'
+        spot_parking: '駐輪場'
+        spot_parking_price: '駐輪場の値段'
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"
+      short: "%Y/%m/%d"

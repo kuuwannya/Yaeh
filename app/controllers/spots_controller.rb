@@ -23,8 +23,9 @@ class SpotsController < ApplicationController
   def create
     @spot = current_user.spots.create(spot_params)
     if @spot.save
-      redirect_to spots_path
+      redirect_to spots_path, success: t('.success')
     else
+      flash.now['danger'] = t('.fail')
       render :new
     end
   end
@@ -33,11 +34,16 @@ class SpotsController < ApplicationController
 
   def update
     if @spot.update(spot_params)
-      redirect_to spot_path(@spot)
+      redirect_to spot_path(@spot), success: t('.success')
     else
+      flash.now['danger'] = t('.fail')
       render :edit
     end
+  end
 
+  def destroy
+    @spot.destroy!
+    redirect_to spots_path, success: t('.success')
   end
 
   private
