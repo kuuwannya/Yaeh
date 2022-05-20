@@ -1,4 +1,7 @@
 class MapsController < ApplicationController
+skip_before_action :require_login, only: :search
+  def index; end
+
   def search
     search_radius = 60
     default_lat = 35.6811673

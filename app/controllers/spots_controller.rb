@@ -1,7 +1,5 @@
 class SpotsController < ApplicationController
-  before_action :require_login
   before_action :spot_find, only: %i[show edit update destroy]
-
   def index
     @spots = Spot.all.includes(:user).order(created_at: :desc)
   end

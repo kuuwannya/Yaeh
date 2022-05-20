@@ -6,7 +6,13 @@
   </li>
   <li class="list-inline-item">
     <%= link_to post_path(post), id: "button-delete-#{post.id}", method: :delete, data: {confirm: '削除しますか？'} do %>
-      <%= icon 'fas', 'trash-can' %>
+      <%= icon 'fas', 'trash' %>
     <% end %>
+  </li>
+  <li class="list-inline-item">
+    <%= link_to 'Twitter', "https://twitter.com/share?text=ツーリング日は#{l post.touring_date, format: :date }！#{post.content}&url=#{request.url}&hashtags=バイク好きと繋がりたい,Yaeh" %>
+  </li>
+  <li class="list-inline-item">
+    <%= link_to 'Line', "https://timeline.line.me/social-plugin/share?text=ツーリング日は#{l post.touring_date, format: :date}！#{post.content}&url=#{request.url}" %>
   </li>
 </ul>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" dir="ltr">
   <head>
     <title>Yaeh</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,7 +12,11 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
+    <% if logged_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
     <%= render 'shared/flash_message' %>
     <%= yield %>
     <%= render 'shared/footer' %>

@@ -40,3 +40,12 @@ ja:
       fail: 'スポットの更新ができませんでした'
     destroy:
       success: 'スポットを削除しました'
+  comments:
+    create:
+      success: 'コメントしました'
+      fail: 'コメントに失敗しました'
+    update:
+      success: 'コメントを更新しました'
+      fail: 'コメントの更新ができませんでした'
+    destroy:
+      success: 'コメントを削除しました'
