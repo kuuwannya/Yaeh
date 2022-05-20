@@ -1,4 +1,6 @@
 ja:
+  defaults:
+    destroy: '削除しますか？'
   users:
     new:
       title: 'ユーザー登録'

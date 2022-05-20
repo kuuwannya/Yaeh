@@ -3,7 +3,7 @@
     <div id="comment-error"></div>
     <%= form_with model: comment, url: [post, comment], id: 'new_comment' do |f| %>
       <%= f.label :content %>
-      <%= f.text_area :content, class: 'form-control mb-3', id: 'js-new-comment-body', row: 4, placeholder: Comment.human_attribute_name(:content) %>
+      <%= f.text_area :content, class: 'form-control mb-3', id: 'js-new-comment-body', row: 4, placeholder: 'コメント' %>
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
   </div>
