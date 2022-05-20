@@ -25,6 +25,16 @@
         </li>
         <li class="nav-item dropdown dropdown-slide">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Map
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to 'スポット検索', root_path, class: 'dropdown-item' %>
+            <%= link_to 'ルート検索', user_top_path, class: 'dropdown-item' %>
+          </div>
+        </li>
+        <li class="nav-item dropdown dropdown-slide">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             掲示板
           </a>
 
@@ -43,10 +53,6 @@
             <%= link_to 'スポット一覧', spots_path, class: 'dropdown-item' %>
             <%= link_to 'スポット作成', new_spot_path, class: 'dropdown-item' %>
           </div>
-        </li>
-
-        <li class="nav-item">
-          <%= link_to 'ブックマーク一覧', '#', class: 'nav-link' %>
         </li>
       </ul>
     </div>
