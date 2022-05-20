@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 before_action :find_post, only: [:edit, :update, :destroy]
+
   def index
     @posts = Post.all.includes(:user, :spots).order(created_at: :desc)
   end
