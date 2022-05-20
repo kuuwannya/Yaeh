@@ -3,8 +3,10 @@
   They will automatically be included in application.css.
 */
 #map {
-  height: 400px;
-  width: 600px;
+  height: 600px;
+  width: 700px;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 .top-wrapper {
@@ -28,3 +30,33 @@
     }
   }
 }
+
+  #pac-input{
+    width: 200px;
+    height: 30px;
+    margin-left: 20px;
+  }
+
+  .button{
+    text-align: center;
+  }
+
+  .copyright{
+    text-align: center;
+  }
+
+  #data-start-point-name{
+    margin-top: 20px;
+  }
+
+  #data-destination-name{
+    margin-top: 20px;
+  }
+
+  #getRoute{
+    margin-top: 20px;
+  }
+
+  #touring-button{
+    padding-top: 40px;
+  }
