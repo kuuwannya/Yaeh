@@ -21,13 +21,15 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
   end
 
   def edit; end
 
   def update
     if @post.update(post_params)
-      redirect_to @post, success: t('.success')
+      redirect_to @post
     else
       flash.now['danger'] = t('.fail')
       render :edit
@@ -35,13 +37,13 @@ before_action :find_post, only: [:edit, :update, :destroy]
   end
 
   def destroy
-    @board.destroy!
+    @post.destroy!
     redirect_to posts_path, success: t('.success')
   end
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date)
+    params.require(:post).permit(:content, :touring_date, :latitude)
   end
 
   def find_post

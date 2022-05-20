@@ -29,7 +29,10 @@ ja:
         rating: '評価'
         spot_parking: '駐輪場'
         spot_parking_price: '駐輪場の値段'
+      comment:
+        content: 'コメント'
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
       short: "%Y/%m/%d"
+      date: "%m/%d"
