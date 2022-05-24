@@ -2,6 +2,7 @@ var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
 var spotMarker = [];
+var infoWindow;
 
 
 function initMap() {
@@ -56,13 +57,13 @@ function initMap() {
         map: map,
         animation: google.maps.Animation.DROP
       });
+
+      infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: '<div class="sample">TAM 大阪</div>' // 吹き出しに表示する内容
+      });
+
       spotMarker[i].addListener('click', () => {
-        location.hash = `#spot-${gon.spot[i]['id']}`;
-        if (currentInfoWindow) {
-          currentInfoWindow.close();
-        }
-        windows[i].open(map, marker[i]); // 吹き出しの表示
-        currentInfoWindow = windows[i];
+        infoWindow.open(map, spotMarker[i]);
       });
     }
   }
