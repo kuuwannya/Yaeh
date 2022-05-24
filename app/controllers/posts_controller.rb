@@ -11,7 +11,6 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   def create
     @post = current_user.posts.new(post_params)
-    @spots = @post.spots
     if @post.save
       redirect_to posts_path, success: t('.success')
     else
