@@ -6,8 +6,7 @@ skip_before_action :require_login
     search_radius = 60
     default_lat = 35.6811673
     default_lng = 139.7670516
-    gon.center_of_map_lat = 35.6811673
-    gon.center_of_map_lng = 139.7670516
+
     gon.zoom_level_of_map = 13
     gon.spots_on_map = Spot.all
 

@@ -2,7 +2,9 @@ var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
 var spotMarker = [];
-var infoWindow;
+var infoWindow = [];
+let shopsData = {};
+let markerData = [];
 
 
 function initMap() {
@@ -40,8 +42,18 @@ function initMap() {
     icon: '/assets/bike_icon.png'
   });
 
-
   if (gon.spots) {
+
+    for (let i = 0; i < gon.spots.length; i++) {
+      shopsData = {
+        id: gon.spots[i]['id'],
+        name: gon.spots[i]['name'],
+        address: gon.spots[i]['address'],
+        lat: gon.spots[i]['latitude'],
+        lng: gon.spots[i]['longitude']
+      };
+      markerData.push(shopsData);
+    }
 
     for (let i = 0; i < gon.spots.length; i++) {
 
@@ -58,12 +70,21 @@ function initMap() {
         animation: google.maps.Animation.DROP
       });
 
-      infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-        content: '<div class="sample">TAM 大阪</div>' // 吹き出しに表示する内容
+      contentStr =
+        '<div name="marker" class="map">' +
+        '<a href="/shops/' + markerData[i]['id'] + '" data-turbolinks="false">' +
+        markerData[i]['name'] +
+        '</a>' +
+        '<p class="mb-0">' + '住所：' + markerData[i]['address'] + '</p>' +
+        '</div>'
+        ;
+
+      infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: contentStr // 吹き出しに表示する内容
       });
 
       spotMarker[i].addListener('click', () => {
-        infoWindow.open(map, spotMarker[i]);
+        infoWindow[i].open(map, spotMarker[i]);
       });
     }
   }
