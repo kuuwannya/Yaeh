@@ -5,6 +5,8 @@ var spotMarker = [];
 var infoWindow = [];
 let shopsData = {};
 let markerData = [];
+// マーカーを消すためのcurrentInfoWindow
+let currentInfoWindow;
 
 
 function initMap() {
@@ -84,7 +86,11 @@ function initMap() {
       });
 
       spotMarker[i].addListener('click', () => {
+        if (currentInfoWindow) { // 表示している吹き出しがあれば閉じる
+          currentInfoWindow.close();
+        }
         infoWindow[i].open(map, spotMarker[i]);
+        currentInfoWindow = infoWindow[i]
       });
     }
   }
