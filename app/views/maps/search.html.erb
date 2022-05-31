@@ -18,7 +18,7 @@
 </div>
 
 <div id="post-button text-center">
-  <%= form_with model: @post, url: new_post_path, method: :get do |f| %>
+  <%= form_with model: @spot, url: new_post_path, method: :get do |f| %>
     <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
     <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
     <div class="button">

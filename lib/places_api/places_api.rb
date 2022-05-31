@@ -1,5 +1,5 @@
 def get_places_data(shop)
-  puts "APIの二郎データを取得"
+  puts "APIのツーリングスポットデータを取得"
   # AutoCompleteを使用してplace_idを取得する
   api_key = ENV['API_KEY']
   query = URI.encode_www_form(

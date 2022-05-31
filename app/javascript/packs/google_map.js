@@ -2,6 +2,11 @@ var pin = null;
 var lat = gon.latitude;
 var lng = gon.longitude;
 var spotMarker = [];
+var infoWindow = [];
+let shopsData = {};
+let markerData = [];
+// マーカーを消すためのcurrentInfoWindow
+let currentInfoWindow;
 
 
 function initMap() {
@@ -39,8 +44,18 @@ function initMap() {
     icon: '/assets/bike_icon.png'
   });
 
-
   if (gon.spots) {
+
+    for (let i = 0; i < gon.spots.length; i++) {
+      shopsData = {
+        id: gon.spots[i]['id'],
+        name: gon.spots[i]['name'],
+        address: gon.spots[i]['address'],
+        lat: gon.spots[i]['latitude'],
+        lng: gon.spots[i]['longitude']
+      };
+      markerData.push(shopsData);
+    }
 
     for (let i = 0; i < gon.spots.length; i++) {
 
@@ -56,13 +71,26 @@ function initMap() {
         map: map,
         animation: google.maps.Animation.DROP
       });
+
+      contentStr =
+        '<div name="marker" class="map">' +
+        '<a href="/shops/' + markerData[i]['id'] + '" data-turbolinks="false">' +
+        markerData[i]['name'] +
+        '</a>' +
+        '<p class="mb-0">' + '住所：' + markerData[i]['address'] + '</p>' +
+        '</div>'
+        ;
+
+      infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: contentStr // 吹き出しに表示する内容
+      });
+
       spotMarker[i].addListener('click', () => {
-        location.hash = `#spot-${gon.spot[i]['id']}`;
-        if (currentInfoWindow) {
+        if (currentInfoWindow) { // 表示している吹き出しがあれば閉じる
           currentInfoWindow.close();
         }
-        windows[i].open(map, marker[i]); // 吹き出しの表示
-        currentInfoWindow = windows[i];
+        infoWindow[i].open(map, spotMarker[i]);
+        currentInfoWindow = infoWindow[i]
       });
     }
   }
