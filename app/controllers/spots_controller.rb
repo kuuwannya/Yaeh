@@ -48,7 +48,7 @@ class SpotsController < ApplicationController
 
   private
   def spot_params
-    params.require(:spot).permit(:name, :address, :spot_parking, :spot_parking_price)
+    params.require(:spot).permit(:name, :address, :latitude, :longitude, :spot_parking, :spot_parking_price)
   end
 
   def spot_find

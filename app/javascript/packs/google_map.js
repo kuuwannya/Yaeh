@@ -9,6 +9,7 @@ let markerData = [];
 let currentInfoWindow;
 
 
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: lat, lng: lng },
@@ -18,20 +19,9 @@ function initMap() {
     mapTypeControl: false,
     gestureHandling: 'greedy',
     zoom: 13,
-    styles: [
-      {
-        featureType: 'all',
-        elementType: 'all',
-      },
-      {
-        featureType: 'poi',
-        elementType: 'all',
-        stylers: [
-          { visibility: 'off' },
-        ],
-      }
-    ]
   });
+
+  let service = new google.maps.places.PlacesService(map);
 
   document.getElementById('lat').value = lat;
   document.getElementById('lng').value = lng;
@@ -98,6 +88,37 @@ function initMap() {
   // ピンの移動
   map.addListener('click', function (e) {
     clickMap(e.latLng, map);
+    if (e.placeId) {
+      let placeId = e.placeId;
+      let service = new google.maps.places.PlacesService(map);
+      service.getDetails(
+        {
+          placeId: placeId,
+          fields: ["name", "formatted_address", "geometry"],
+        },
+        function (placeOnMap, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            let contentOnMap =
+              `<div id="ababab">` +
+              `<p>${placeOnMap.name}</p>` +
+              `<p>${placeOnMap.formatted_address}</p>` +
+              `<input type="button" value="投稿" id="addStartPoint" href="#startPoint">` +
+              `<input type="button" value="New Spot" id="addDestination" href="#destination">` +
+              `</div>`;
+            let infowindow = new google.maps.InfoWindow({
+              content: contentOnMap,
+              position: e.latLng,
+            });
+            if (currentInfoWindow) {
+              currentInfoWindow.close();
+            }
+            infowindow.open(map);
+            currentInfoWindow = infowindow;
+            let place = JSON.parse(JSON.stringify(placeOnMap));
+          }
+        }
+      );
+    }
   });
 
   $(function () {
