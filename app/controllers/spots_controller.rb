@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
   before_action :spot_find, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
+  skip_before_action :verify_authenticity_token
 
   def index
     @spots = Spot.all.includes(:user).order(created_at: :desc)
@@ -17,11 +18,13 @@ class SpotsController < ApplicationController
   end
 
   def new
-    @spot = Spot.new(spot_lat_lng)
+    @spot = Spot.new
+    @spot.name = params[:name]
+    @spot.address = params[:address]
   end
 
   def create
-    @spot = current_user.spots.create(spot_params)
+    @spot = current_user.spots.create.params[:name][:address]
     if @spot.save
       redirect_to spots_path, success: t('.success')
     else
@@ -48,14 +51,10 @@ class SpotsController < ApplicationController
 
   private
   def spot_params
-    params.require(:spot).permit(:name, :address, :latitude, :longitude, :spot_parking, :spot_parking_price)
+    params[:name][:address]
   end
 
   def spot_find
       @spot = Spot.find(params[:id])
-  end
-
-  def spot_params
-    params.require(:spot).permit(:name, :address, :spot_parking, :spot_parking_price)
   end
 end
