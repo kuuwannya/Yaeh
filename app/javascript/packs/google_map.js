@@ -103,7 +103,7 @@ function initMap() {
               `<div id="ababab">` +
               `<p>${placeOnMap.name}</p>` +
               `<p>${placeOnMap.formatted_address}</p>` +
-              `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}" id="createSpot">` +
+              `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}">` +
               `New Spot` +
               `</a>` +
               `<input type="button" value="投稿" id="createNewSpot" href="#destination">` +

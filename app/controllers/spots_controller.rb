@@ -12,8 +12,6 @@ class SpotsController < ApplicationController
     gon.center_of_map_lng = @spot.longitude
     gon.zoom_level_of_map = 17
     gon.spots_on_map = Spot.all
-    @longtitude = @spot.latitude
-    @latitude = @spot.longitude
     gon.spot_id = @spot.id
   end
 
@@ -21,10 +19,13 @@ class SpotsController < ApplicationController
     @spot = Spot.new
     @spot.name = params[:name]
     @spot.address = params[:address]
+    @spot.place_id = params[:place_id]
+    @spot.latitude = params[:latitude]
+    @spot.longitude = params[:longitude]
   end
 
   def create
-    @spot = current_user.spots.create.params[:name][:address]
+    @spot = current_user.spots.new(spot_params)
     if @spot.save
       redirect_to spots_path, success: t('.success')
     else
@@ -51,7 +52,7 @@ class SpotsController < ApplicationController
 
   private
   def spot_params
-    params[:name][:address]
+    params.require(:spot).permit(:name, :address, :place_id, :latitude, :longitude, :prefecture)
   end
 
   def spot_find
