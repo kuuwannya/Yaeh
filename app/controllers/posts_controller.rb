@@ -7,11 +7,13 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
+    @spot = Spot.find(params[:spot_id])
   end
 
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
+      binding.pry
       redirect_to posts_path, success: t('.success')
     else
       flash.now['danger'] = t('.fail')
@@ -43,7 +45,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date, :latitude)
+    params.require(:post).permit(:content, :touring_date, :spot_id)
   end
 
   def find_post

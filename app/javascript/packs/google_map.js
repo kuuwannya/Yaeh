@@ -68,7 +68,9 @@ function initMap() {
         markerData[i]['name'] +
         '</a>' +
         '<p class="mb-0">' + '住所：' + markerData[i]['address'] + '</p>' +
-        `<input type="button" value="投稿" id="createPost" href="#startPoint">` +
+        `<a href="/posts/new?name=${markerData[i]['name']}&spot_id=${markerData[i]['id']}">` +
+        `投稿` +
+        `</a>` +
         '</div>'
         ;
 
@@ -106,7 +108,6 @@ function initMap() {
               `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}">` +
               `New Spot` +
               `</a>` +
-              `<input type="button" value="投稿" id="createNewSpot" href="#destination">` +
               `</div>`;
             let infowindow = new google.maps.InfoWindow({
               content: contentOnMap,
