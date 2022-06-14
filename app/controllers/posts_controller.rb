@@ -2,18 +2,17 @@ class PostsController < ApplicationController
 before_action :find_post, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.includes(:user, :spots).order(created_at: :desc)
+    @posts = Post.all.includes(:user, :spot).order(created_at: :desc)
   end
 
   def new
     @post = Post.new
-    @spot = Spot.find(params[:spot_id])
+    @post.spot_id = params[:spot_id]
   end
 
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      binding.pry
       redirect_to posts_path, success: t('.success')
     else
       flash.now['danger'] = t('.fail')
