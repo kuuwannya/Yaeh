@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
   before_action :spot_find, only: %i[show edit update destroy]
   skip_before_action :require_login, only: %i[index show]
+  skip_before_action :verify_authenticity_token
 
   def index
     @spots = Spot.all.includes(:user).order(created_at: :desc)
@@ -11,17 +12,20 @@ class SpotsController < ApplicationController
     gon.center_of_map_lng = @spot.longitude
     gon.zoom_level_of_map = 17
     gon.spots_on_map = Spot.all
-    @longtitude = @spot.latitude
-    @latitude = @spot.longitude
     gon.spot_id = @spot.id
   end
 
   def new
-    @spot = Spot.new(spot_lat_lng)
+    @spot = Spot.new
+    @spot.name = params[:name]
+    @spot.address = params[:address]
+    @spot.place_id = params[:place_id]
+    @spot.latitude = params[:latitude]
+    @spot.longitude = params[:longitude]
   end
 
   def create
-    @spot = current_user.spots.create(spot_params)
+    @spot = current_user.spots.new(spot_params)
     if @spot.save
       redirect_to spots_path, success: t('.success')
     else
@@ -48,14 +52,10 @@ class SpotsController < ApplicationController
 
   private
   def spot_params
-    params.require(:spot).permit(:name, :address, :latitude, :longitude, :spot_parking, :spot_parking_price)
+    params.require(:spot).permit(:name, :address, :place_id, :latitude, :longitude, :prefecture)
   end
 
   def spot_find
       @spot = Spot.find(params[:id])
-  end
-
-  def spot_params
-    params.require(:spot).permit(:name, :address, :spot_parking, :spot_parking_price)
   end
 end
