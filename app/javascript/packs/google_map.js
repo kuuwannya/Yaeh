@@ -59,7 +59,11 @@ function initMap() {
       spotMarker[i] = new google.maps.Marker({
         position: markerLatLng,
         map: map,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        icon: {
+          url: '/assets/love-pin.png',
+          scaledSize: new google.maps.Size(50, 50)
+        }
       });
 
       contentStr =
