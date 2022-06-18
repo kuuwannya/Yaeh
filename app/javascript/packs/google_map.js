@@ -60,9 +60,23 @@ function initMap() {
         position: markerLatLng,
         map: map,
         animation: google.maps.Animation.DROP,
-        icon: {
-          url: '/assets/love-pin.png',
-          scaledSize: new google.maps.Size(50, 50)
+        icon: '/assets/love-pin.png'
+      });
+
+      console.log('ズーム値:', map.getZoom());
+      // ズーム値変更時
+      map.addListener('zoom_changed', function () {
+        console.log('ズーム値:', map.getZoom());
+        // 20未満の場合はマーカーサイズ縮小
+        if (map.getZoom() < 12) {
+          // マーカー1のサイズ変更
+          spotMarker[i].setIcon({
+            url: '/assets/love-pin.png',
+            scaledSize: new google.maps.Size(40, 40)
+          });
+          // 20以上の場合はマーカーサイズを戻す
+        } else {
+          spotMarker[i].setIcon('/assets/love-pin.png');
         }
       });
 
