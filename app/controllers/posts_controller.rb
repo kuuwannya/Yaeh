@@ -13,6 +13,8 @@ before_action :find_post, only: [:edit, :update, :destroy]
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
+      @spot_post_count = Spot.find_by(id: post_params[:spot_id])
+      @spot_post_count.update(spot_post_count: Post.where(spot_id: post_params[:spot_id]).count)
       redirect_to posts_path, success: t('.success')
     else
       flash.now['danger'] = t('.fail')

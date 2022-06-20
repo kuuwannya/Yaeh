@@ -43,6 +43,7 @@ function initMap() {
         address: gon.spots[i]['address'],
         lat: gon.spots[i]['latitude'],
         lng: gon.spots[i]['longitude']
+        SpotPostCount: gon.spots[i]['spot_post_count']
       };
       markerData.push(shopsData);
     }
@@ -54,6 +55,8 @@ function initMap() {
         lat: parseFloat(gon.spots[i]['latitude']),
         lng: parseFloat(gon.spots[i]['longitude'])
       });
+
+      SpotId = gon.spots[i]['id'];
 
       // マーカーの作成
       spotMarker[i] = new google.maps.Marker({

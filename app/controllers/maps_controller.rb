@@ -14,10 +14,12 @@ skip_before_action :require_login
       @latitude = geo_params[:latitude].to_f
       @longitude = geo_params[:longitude].to_f
       @spots = Spot.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
+      @posts = Post.all
       @area = search_area(@latitude, @longitude)
       gon.latitude = @latitude
       gon.longitude = @longitude
       gon.spots = @spots
+      gon.posts = @posts
     else
       gon.latitude = default_lat
       gon.longitude = default_lng
@@ -57,8 +59,8 @@ skip_before_action :require_login
     params.require(:q).permit(:latitude, :longitude)
   end
 
-  def spot_parmas
-    params.require(:r).permit(:latitude, :longitude)
+  def spot_id_params
+    params.require(:q).permit(:spot_id)
   end
 
   def search_area(lat, long)
