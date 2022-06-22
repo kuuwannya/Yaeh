@@ -42,7 +42,8 @@ function initMap() {
         name: gon.spots[i]['name'],
         address: gon.spots[i]['address'],
         lat: gon.spots[i]['latitude'],
-        lng: gon.spots[i]['longitude']
+        lng: gon.spots[i]['longitude'],
+        spotPostCount: gon.spots[i]['spot_post_count']
       };
       markerData.push(shopsData);
     }
@@ -55,12 +56,40 @@ function initMap() {
         lng: parseFloat(gon.spots[i]['longitude'])
       });
 
+
       // マーカーの作成
       spotMarker[i] = new google.maps.Marker({
         position: markerLatLng,
         map: map,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        icon: '/assets/love-pin.png'
       });
+
+      if (gon.spots[i]['spot_post_count'] > 5) {
+        spotMarker[i].setIcon({ url: '/assets/love-pin.png' });
+      } else if (gon.spots[i]['spot_post_count'] > 3) {
+        spotMarker[i].setIcon({ url: '/assets/star-pin.png' });
+      } else {
+        spotMarker[i].setIcon({ url: '/assets/location.png' });
+      }
+
+      console.log('ズーム値:', map.getZoom());
+      // ズーム値変更時
+      map.addListener('zoom_changed', function () {
+        console.log('ズーム値:', map.getZoom());
+        // 20未満の場合はマーカーサイズ縮小
+        if (map.getZoom() < 12) {
+          // マーカー1のサイズ変更
+          spotMarker[i].setIcon({
+            url: '/assets/love-pin.png',
+            scaledSize: new google.maps.Size(40, 40)
+          });
+          // 20以上の場合はマーカーサイズを戻す
+        } else {
+          spotMarker[i].setIcon('/assets/love-pin.png');
+        }
+      });
+
 
       contentStr =
         '<div name="marker" class="map">' +
@@ -68,7 +97,10 @@ function initMap() {
         markerData[i]['name'] +
         '</a>' +
         '<p class="mb-0">' + '住所：' + markerData[i]['address'] + '</p>' +
-        `<input type="button" value="投稿" id="createPost" href="#startPoint">` +
+        '<p class="mb-0">' + markerData[i]['spotPostCount'] + '</p>' +
+        `<a href="/posts/new?name=${markerData[i]['name']}&spot_id=${markerData[i]['id']}">` +
+        `投稿` +
+        `</a>` +
         '</div>'
         ;
 
@@ -106,7 +138,6 @@ function initMap() {
               `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}">` +
               `New Spot` +
               `</a>` +
-              `<input type="button" value="投稿" id="createNewSpot" href="#destination">` +
               `</div>`;
             let infowindow = new google.maps.InfoWindow({
               content: contentOnMap,

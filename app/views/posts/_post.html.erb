@@ -9,12 +9,10 @@
             <%= post.user.name %>
           </li>
           <li class="list-inline-item">
-            <%#= icon 'far', 'user' %>
-            <%= l post.touring_date, format: :short %>
+            <%= post.spot.name %>
           </li>
           <li class="list-inline-item">
-            <%#= icon 'far', 'user' %>
-            <%#= @spot.name %>
+            <%= l post.touring_date, format: :short %>
           </li>
         </ul>
         <h4>

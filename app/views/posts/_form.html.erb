@@ -1,5 +1,10 @@
 <%= form_with model: @post, local: true, class: "new_post" do |f| %>
   <div class="form-group">
+    <%= f.label :spot_id, class: "spot_id" %>
+    <%= f.text_field :spot_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :touring_date, class: "spot_touring_date" %>
     <%= f.date_field :touring_date, class: "form-control" %>
   </div>
@@ -9,12 +14,10 @@
     <%= f.text_field :content, class: "form-control" %>
   </div>
 
+  <%= @post.spot.name %>
+
   <div class="form-group">
     <%#= f.label :route_image, class: "spot_touring_date" %>
-    <%#= f.text_field :route_image, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%#= f.label :spot.name, class: "spot_touring_date" %>
     <%#= f.text_field :route_image, class: "form-control" %>
   </div>
   <%= f.submit class: "btn btn-primary" %>

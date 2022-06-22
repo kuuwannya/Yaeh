@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'maps#search'
   get 'user_top', to: 'maps#user'
 
+  resources :spots
   resources :posts do
     resources :comments, shallow: true
   end
