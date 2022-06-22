@@ -42,8 +42,8 @@ function initMap() {
         name: gon.spots[i]['name'],
         address: gon.spots[i]['address'],
         lat: gon.spots[i]['latitude'],
-        lng: gon.spots[i]['longitude']
-        SpotPostCount: gon.spots[i]['spot_post_count']
+        lng: gon.spots[i]['longitude'],
+        spotPostCount: gon.spots[i]['spot_post_count']
       };
       markerData.push(shopsData);
     }
@@ -56,7 +56,6 @@ function initMap() {
         lng: parseFloat(gon.spots[i]['longitude'])
       });
 
-      SpotId = gon.spots[i]['id'];
 
       // マーカーの作成
       spotMarker[i] = new google.maps.Marker({
@@ -65,6 +64,14 @@ function initMap() {
         animation: google.maps.Animation.DROP,
         icon: '/assets/love-pin.png'
       });
+
+      if (gon.spots[i]['spot_post_count'] > 5) {
+        spotMarker[i].setIcon({ url: '/assets/love-pin.png' });
+      } else if (gon.spots[i]['spot_post_count'] > 3) {
+        spotMarker[i].setIcon({ url: '/assets/star-pin.png' });
+      } else {
+        spotMarker[i].setIcon({ url: '/assets/location.png' });
+      }
 
       console.log('ズーム値:', map.getZoom());
       // ズーム値変更時
@@ -83,12 +90,14 @@ function initMap() {
         }
       });
 
+
       contentStr =
         '<div name="marker" class="map">' +
         '<a href="/shops/' + markerData[i]['id'] + '" data-turbolinks="false">' +
         markerData[i]['name'] +
         '</a>' +
         '<p class="mb-0">' + '住所：' + markerData[i]['address'] + '</p>' +
+        '<p class="mb-0">' + markerData[i]['spotPostCount'] + '</p>' +
         `<a href="/posts/new?name=${markerData[i]['name']}&spot_id=${markerData[i]['id']}">` +
         `投稿` +
         `</a>` +

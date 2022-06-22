@@ -14,17 +14,26 @@ skip_before_action :require_login
       @latitude = geo_params[:latitude].to_f
       @longitude = geo_params[:longitude].to_f
       @spots = Spot.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
+      #@spots = attribute
       @posts = Post.all
       @area = search_area(@latitude, @longitude)
       gon.latitude = @latitude
       gon.longitude = @longitude
       gon.spots = @spots
-      gon.posts = @posts
     else
       gon.latitude = default_lat
       gon.longitude = default_lng
     end
   end
+
+  #def attribute
+    #Spot.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude]).map do |spot|
+      #{id:spot.id,
+      #name: spot.name
+      #count:
+      #}
+    #end
+  #end
 
   def user
     search_radius = 60
