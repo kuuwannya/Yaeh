@@ -13,7 +13,7 @@ skip_before_action :require_login
     if params[:q]
       @latitude = geo_params[:latitude].to_f
       @longitude = geo_params[:longitude].to_f
-      @spots = Spot.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
+      @spots = Spot.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude])
       #@spots = attribute
       @posts = Post.all
       @area = search_area(@latitude, @longitude)
