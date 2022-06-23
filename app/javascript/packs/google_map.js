@@ -71,11 +71,11 @@ function initMap() {
       //投稿数に合わせてマーカーの変更のメソッド
       function spotPostCounter(spot) {
         if (spot > 5) {
-          spotMarker[i].setIcon({ url: '/assets/love-pin.png' });
+          spotMarker[i].setIcon({ url: '/assets/pink-pin.png' });
         } else if (spot > 3) {
-          spotMarker[i].setIcon({ url: '/assets/star-pin.png' });
+          spotMarker[i].setIcon({ url: '/assets/green-pin.png' });
         } else {
-          spotMarker[i].setIcon({ url: '/assets/location.png' });
+          spotMarker[i].setIcon({ url: '/assets/lightblue-pin.png' });
         }
       }
 
@@ -87,17 +87,17 @@ function initMap() {
         if (map.getZoom() < 12) {
           if (gon.spots[i]['spot_post_count'] > 5) {
             spotMarker[i].setIcon({
-              url: '/assets/love-pin.png',
+              url: '/assets/pink-pin.png',
               scaledSize: new google.maps.Size(40, 40)
             });
           } else if (gon.spots[i]['spot_post_count'] > 3) {
             spotMarker[i].setIcon({
-              url: '/assets/star-pin.png',
+              url: '/assets/green-pin.png',
               scaledSize: new google.maps.Size(40, 40)
             });
           } else {
             spotMarker[i].setIcon({
-              url: '/assets/location.png',
+              url: '/assets/lightblue-pin.png',
               scaledSize: new google.maps.Size(40, 40)
             });
           }
@@ -144,7 +144,7 @@ function initMap() {
       service.getDetails(
         {
           placeId: placeId,
-          fields: ["name", "formatted_address", "geometry"],
+          fields: ["name", "formatted_address", "geometry", "formatted_phone_number", "rating"],
         },
         function (placeOnMap, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -152,7 +152,7 @@ function initMap() {
               `<div id="ababab">` +
               `<p>${placeOnMap.name}</p>` +
               `<p>${placeOnMap.formatted_address}</p>` +
-              `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}">` +
+              `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}&tel_number=${placeOnMap.formatted_phone_number}&opening_at=${placeOnMap.weekday_text}&rating=${placeOnMap.rating}">` +
               `New Spot` +
               `</a>` +
               `</div>`;
