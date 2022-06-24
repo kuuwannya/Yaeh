@@ -14,7 +14,11 @@
     <%= f.text_field :content, class: "form-control" %>
   </div>
 
-  <%= @post.spot.name %>
+  <div class="form-group">
+    <%= f.label :images %>
+    <%= f.file_field :images, multiple: true %>
+  </div>
+
 
   <div class="form-group">
     <%#= f.label :route_image, class: "spot_touring_date" %>

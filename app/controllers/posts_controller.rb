@@ -46,7 +46,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date, :spot_id)
+    params.require(:post).permit(:content, :touring_date, :spot_id, images: [])
   end
 
   def find_post
