@@ -11,7 +11,6 @@ class SpotsController < ApplicationController
     @spot = Spot.find(params[:id])
     @longitude = @spot.longitude
     @latitude = @spot.latitude
-    binding.pry
     @posts = @spot.posts.first(5)
   end
 
