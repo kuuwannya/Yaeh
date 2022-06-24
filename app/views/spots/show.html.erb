@@ -13,12 +13,19 @@
               <h3 style='display: inline;'><%= @spot.name %></h3>
             </div>
           </div>
-          <p><%= @spot.address %></p>
-          <p><%= @spot.opening_at %></p>
-          <p><%= @spot.tel_number %></p>
+          <p>address：<%= @spot.address %></p>
+          <p>opening：<%= @spot.opening_at %></p>
+          <p>Tel:<%= @spot.tel_number %></p>
           <p><%= @spot.rating %></p>
+
+          <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['API_KEY']%>&q=<%=@spot.name%>&center=<%=@spot.latitude%>,<%=@spot.longitude%>&zoom=15"></iframe>
+          <%= link_to 'Google mapへ', "https://www.google.com/maps/search/?api=1&query=#{@spot.name}&query_place_id=#{@spot.place_id}"%>
           <p><%= @spot.spot_parking %></p>
           <p><%= @spot.spot_parking_price %></p>
+        </div>
+
+        <div class="card-body post">
+          <%= render partial: "posts/post", collection: @posts %>
         </div>
       </article>
     </div>

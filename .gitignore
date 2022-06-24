@@ -78,4 +78,4 @@ er.drawio
 yarn-debug.log*
 .yarn-integrity
 
-/.env
+/app/images

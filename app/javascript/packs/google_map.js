@@ -65,28 +65,45 @@ function initMap() {
         icon: '/assets/love-pin.png'
       });
 
-      if (gon.spots[i]['spot_post_count'] > 5) {
-        spotMarker[i].setIcon({ url: '/assets/love-pin.png' });
-      } else if (gon.spots[i]['spot_post_count'] > 3) {
-        spotMarker[i].setIcon({ url: '/assets/star-pin.png' });
-      } else {
-        spotMarker[i].setIcon({ url: '/assets/location.png' });
+      //検索一回目のマーカー変更
+      spotPostCounter(gon.spots[i]['spot_post_count']);
+
+      //投稿数に合わせてマーカーの変更のメソッド
+      function spotPostCounter(spot) {
+        if (spot > 5) {
+          spotMarker[i].setIcon({ url: '/assets/pink-pin.png' });
+        } else if (spot > 3) {
+          spotMarker[i].setIcon({ url: '/assets/green-pin.png' });
+        } else {
+          spotMarker[i].setIcon({ url: '/assets/lightblue-pin.png' });
+        }
       }
 
       console.log('ズーム値:', map.getZoom());
       // ズーム値変更時
       map.addListener('zoom_changed', function () {
         console.log('ズーム値:', map.getZoom());
-        // 20未満の場合はマーカーサイズ縮小
+        // 20未満の場合はマーカーサイズ縮小&&マーカーの変更
         if (map.getZoom() < 12) {
-          // マーカー1のサイズ変更
-          spotMarker[i].setIcon({
-            url: '/assets/love-pin.png',
-            scaledSize: new google.maps.Size(40, 40)
-          });
+          if (gon.spots[i]['spot_post_count'] > 5) {
+            spotMarker[i].setIcon({
+              url: '/assets/pink-pin.png',
+              scaledSize: new google.maps.Size(40, 40)
+            });
+          } else if (gon.spots[i]['spot_post_count'] > 3) {
+            spotMarker[i].setIcon({
+              url: '/assets/green-pin.png',
+              scaledSize: new google.maps.Size(40, 40)
+            });
+          } else {
+            spotMarker[i].setIcon({
+              url: '/assets/lightblue-pin.png',
+              scaledSize: new google.maps.Size(40, 40)
+            });
+          }
           // 20以上の場合はマーカーサイズを戻す
         } else {
-          spotMarker[i].setIcon('/assets/love-pin.png');
+          spotPostCounter(gon.spots[i]['spot_post_count']);
         }
       });
 
@@ -127,7 +144,7 @@ function initMap() {
       service.getDetails(
         {
           placeId: placeId,
-          fields: ["name", "formatted_address", "geometry"],
+          fields: ["name", "formatted_address", "geometry", "formatted_phone_number", "rating"],
         },
         function (placeOnMap, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -135,7 +152,7 @@ function initMap() {
               `<div id="ababab">` +
               `<p>${placeOnMap.name}</p>` +
               `<p>${placeOnMap.formatted_address}</p>` +
-              `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}">` +
+              `<a href="/spots/new?name=${placeOnMap.name}&address=${placeOnMap.formatted_address}&place_id=${placeId}&latitude=${lat}&longitude=${lng}&tel_number=${placeOnMap.formatted_phone_number}&opening_at=${placeOnMap.weekday_text}&rating=${placeOnMap.rating}">` +
               `New Spot` +
               `</a>` +
               `</div>`;

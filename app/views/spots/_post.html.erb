@@ -18,7 +18,7 @@
         <h4>
           <%= link_to post.content, post_path(post), class: 'card-text' %>
         </h4>
-        <%= render 'posts/crud_menus' , post: post if current_user.own?(post) %>
+        <%= render 'crud_menus' , post: post if current_user.own?(post) %>
         <ul class="list-inline">
           <li class="list-inline-item">
             <%#= icon 'far', 'calendar' %>

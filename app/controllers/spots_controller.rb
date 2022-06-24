@@ -8,11 +8,10 @@ class SpotsController < ApplicationController
   end
 
   def show
-    gon.center_of_map_lat = @spot.latitude
-    gon.center_of_map_lng = @spot.longitude
-    gon.zoom_level_of_map = 17
-    gon.spots_on_map = Spot.all
-    gon.spot_id = @spot.id
+    @spot = Spot.find(params[:id])
+    @longitude = @spot.longitude
+    @latitude = @spot.latitude
+    @posts = @spot.posts.first(5)
   end
 
   def new
