@@ -23,6 +23,10 @@
           <p><%= @spot.spot_parking %></p>
           <p><%= @spot.spot_parking_price %></p>
         </div>
+
+        <div class="card-body post">
+          <%= render partial: "posts/post", collection: @posts %>
+        </div>
       </article>
     </div>
   </div>
