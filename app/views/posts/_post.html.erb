@@ -15,6 +15,14 @@
             <%= l post.touring_date, format: :short %>
           </li>
         </ul>
+        <% if post.images.attached? %>
+          <div>
+            <p>Images:</p>
+            <% post.images.each do |image| %>
+            <%= image_tag image, width: 300, height: 200 %>
+            <% end %>
+          </div>
+        <% end %>
         <h4>
           <%= link_to post.content, post_path(post), class: 'card-text' %>
         </h4>
