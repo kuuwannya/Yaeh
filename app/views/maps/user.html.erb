@@ -42,7 +42,10 @@
       <%= form_with scope: :q, url: root_path, method: :get do |f| %>
         <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
         <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
-        <%= f.submit 'ツーリングスポットを探す', id: 'touring_spot_search' %>
+        <%= f.number_field :spot_id, id: 'spot_id', value: '', type: 'hidden' %>
+        <div class="button">
+          <%= f.submit 'ツーリングスポットを探す' %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -21,8 +21,6 @@ function initMap() {
     zoom: 13,
   });
 
-  let service = new google.maps.places.PlacesService(map);
-
   document.getElementById('lat').value = lat;
   document.getElementById('lng').value = lng;
 
@@ -254,8 +252,8 @@ function initMap() {
 window.initMap = initMap;
 
 clickMap = (lat_lng, map) => {
-  lat = lat_lng.lat();
-  lng = lat_lng.lng();
+  lat = Math.floor(lat * 10000000) / 10000000;
+  lng = Math.floor(lng * 10000000) / 10000000;
 
   //座標をhidden formに入力する
   document.getElementById('lat').value = lat;
