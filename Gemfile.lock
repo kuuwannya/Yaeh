@@ -310,6 +310,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-turbolinks
   listen (~> 3.3)
+  nokogiri
   pg
   pry-rails
   puma (~> 5.0)
