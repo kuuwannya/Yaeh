@@ -1,6 +1,14 @@
-<div class="container pt-3">
+<div class="container-fluid">
   <div class="row">
-    <div>
+    <div class= "col-xs-12 col-sm-12">
+      <% if @user.header.attached? %>
+        <%= image_tag @user.header, size: '100x50' %>
+      <% else %>
+        <%= image_tag 'sample.jpg', size: '1000x300'%>
+      <% end %>
+    </div>
+
+    <div class= "col-sm-1">
       <p>
         <% if @user.avatar.attached? %>
           <%= image_tag @user.avatar, size: '40x40', class: 'rounded-circle mr15' %>
@@ -8,18 +16,25 @@
           <%= image_tag 'sample.jpg', size: '40x40', class: 'rounded-circle mr15'%>
         <% end %>
       </p>
-      <h1 class="float-left mb-5"><%= current_user.name %></h1>
     </div>
-    <div class="col-md-10 offset-md-1">
+    <div class= "col-sm-1">
+      <p class="float-left mb-5"><%= current_user.name %></p>
+    </div>
+    <div class= "col-sm-1">
       <%= link_to edit_user_path(current_user), id: "button-edit-#{current_user.id}" do %>
         <%= icon 'fa', 'pen' %>
       <% end %>
+    </div>
+
+    <div class="col-md-10">
       <%#= link_to t('.edit'), edit_profile_path, class: 'btn btn-success float-right' %>
       <%= current_user.profile %>
     </div>
 
-    <div>
+    <div class= "col-sm-1">
       <p><%= current_user.email %></p>
     </div>
+
+    <%= render partial: 'posts/post', collection: @posts %>
   </div>
 </div>

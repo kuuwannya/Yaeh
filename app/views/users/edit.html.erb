@@ -23,6 +23,15 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :header %>
+          <%= f.file_field :header, class: "form-control", onchange: 'previewImage()' %>
+          <%= f.hidden_field :header_cache %>
+          <% if @user.header.attached? %>
+            <% @user.header.purge %>
+          <% end %>
+        </div>
+
+        <div class="form-group">
           <%= f.label :profile%>
           <%= f.text_area :profile, class: "form-control"%>
         </div>
