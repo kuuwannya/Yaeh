@@ -36,7 +36,8 @@ gem 'geokit-rails'
 gem 'rexml', '~> 3.2', '>= 3.2.4'
 gem 'jquery-turbolinks'
 gem 'font-awesome-sass', '~> 5.11.2'
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', require: false
+gem 'nokogiri'
 
 
 group :development, :test do

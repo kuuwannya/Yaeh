@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :spots
   has_many :posts
   has_many :comments, dependent: :destroy
+  has_one_attached :avatar
+  has_one_attached :header
 
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true, length: { maximum: 255}

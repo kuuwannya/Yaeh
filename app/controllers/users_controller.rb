@@ -15,7 +15,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @posts = @user.posts.order(created_at: :desc)
+  end
 
   def edit; end
 
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :avatar_cache, :profile)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :profile)
     end
 
     def user_find
