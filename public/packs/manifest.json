@@ -38,10 +38,10 @@
     },
     "google_map": {
       "js": [
-        "/packs/js/google_map-6dfdd0d7ad5d7a9a5257.js"
+        "/packs/js/google_map-40a65d9f21f72cff6779.js"
       ],
       "js.map": [
-        "/packs/js/google_map-6dfdd0d7ad5d7a9a5257.js.map"
+        "/packs/js/google_map-40a65d9f21f72cff6779.js.map"
       ]
     },
     "spot_google_map": {
@@ -53,8 +53,8 @@
       ]
     }
   },
-  "google_map.js": "/packs/js/google_map-6dfdd0d7ad5d7a9a5257.js",
-  "google_map.js.map": "/packs/js/google_map-6dfdd0d7ad5d7a9a5257.js.map",
+  "google_map.js": "/packs/js/google_map-40a65d9f21f72cff6779.js",
+  "google_map.js.map": "/packs/js/google_map-40a65d9f21f72cff6779.js.map",
   "google_map_route.js": "/packs/js/google_map_route-fa82d1dcc19b351507fd.js",
   "google_map_route.js.map": "/packs/js/google_map_route-fa82d1dcc19b351507fd.js.map",
   "spot_google_map.js": "/packs/js/spot_google_map-ef4b7dcbef10d6e1a4f4.js",
