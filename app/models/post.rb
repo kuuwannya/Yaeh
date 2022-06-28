@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
-  belongs_to :spot
+  has_many :post2_spots, dependent: :destroy
+  has_many :spots, through: :post2_spots
   has_many :comments, dependent: :destroy
   has_many_attached :images
 

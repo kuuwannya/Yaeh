@@ -7,14 +7,15 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
-    @post.spot_id = params[:spot_id]
   end
 
   def create
+    binding.pry
     @post = current_user.posts.new(post_params)
+    binding.pry
     if @post.save
-      spot = Spot.find(post_params[:spot_id])
-      spot.update(spot_post_count: Post.where(spot_id: post_params[:spot_id]).count)
+      #spot = Spot.find(post_params[:spot_ids])
+      #spot.update(spot_post_count: Post.where(spot_id: post_params[:spot_id]).count)
       redirect_to posts_path, success: t('.success')
     else
       flash.now['danger'] = t('.fail')
@@ -46,7 +47,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date, :spot_id, images: [])
+    params.require(:post).permit(:content, :touring_date, images: [], spot_ids: [])
   end
 
   def find_post
