@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+binding.pry
 before_action :find_post, only: [:edit, :update, :destroy]
 
   def index
@@ -47,7 +48,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date, images: [], spot_ids: [])
+    params.require(:post).permit(:content, :touring_date, spot_ids: [], images: [])
   end
 
   def find_post
