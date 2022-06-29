@@ -1,7 +1,7 @@
 <%= form_with model: @post, local: true, class: "new_post" do |f| %>
   <%#= hidden_field_tag :spot_ids, params[:spot_ids], @post.post2_spots.spot_ids %>
   <div class="form-group">
-    <%= f.hidden_field spot_ids:[], class: "form-control" , value: [params[:spot_ids]] %>
+    <%= f.hidden_field 'post[spot_ids][]', value: params[:spot_ids] %>
   </div>
 
   <div class="form-group">

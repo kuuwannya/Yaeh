@@ -117,7 +117,7 @@ function initMap() {
         `投稿` +
         `</a>` +
         `<form name="newPost" action="/posts/new" method="get">` +
-        `<input type="hidden" name="spot_ids[]" value= "${markerData[i]['id']}" />` +
+        `<input type="hidden" name="spot_ids" value= "${markerData[i]['id']}" />` +
         `<input type="submit" value="投稿">` +
         `</form>` +
         '</div>'
