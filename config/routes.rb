@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '//admin', as: 'rails_admin'
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   root 'maps#search'
   get 'user_top', to: 'maps#user'
+  resources :password_resets, only: %i[new create edit update]
 
   resources :spots
   resources :posts do
