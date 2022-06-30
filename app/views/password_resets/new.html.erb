@@ -1,0 +1,16 @@
+<div class = "container">
+  <div class = "row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <h1>パスワードリセット</h1>
+      <%= form_with url: password_resets_path, local: true, method: :post do |f| %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+        <div class= "actions">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-binding.pry
 before_action :find_post, only: [:edit, :update, :destroy]
 
   def index
@@ -11,9 +10,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
   end
 
   def create
-    binding.pry
     @post = current_user.posts.new(post_params)
-    binding.pry
     if @post.save
       #spot = Spot.find(post_params[:spot_ids])
       #spot.update(spot_post_count: Post.where(spot_id: post_params[:spot_id]).count)
