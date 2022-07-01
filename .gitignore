@@ -79,3 +79,5 @@ yarn-debug.log*
 .yarn-integrity
 
 /app/images
+
+/config/master.key

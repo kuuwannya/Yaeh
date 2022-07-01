@@ -35,6 +35,11 @@
       <p><%= current_user.email %></p>
     </div>
 
+
+    <div>
+      <%= link_to "退会手続きへ", withdrawal_user_path(@user), class: "btn btn-danger" %>
+    </div>
+
     <%= render partial: 'posts/post', collection: @posts %>
   </div>
 </div>
