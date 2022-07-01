@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, shallow: true
   end
-  resources :users
+  resources :users do
+    member do
+      get 'withdrawal'
+    end
+  end
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"

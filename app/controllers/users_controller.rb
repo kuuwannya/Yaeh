@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_find, only: %i[show edit update destroy]
+  before_action :user_find, only: %i[show edit update destroy withdrawal]
   skip_before_action :require_login, only: [:new, :create]
   def new
     @user = User.new
@@ -34,6 +34,8 @@ class UsersController < ApplicationController
     @user.destroy!
     redirect_to root_path, success: t('.success')
   end
+
+  def withdrawal; end
 
   private
     def user_params

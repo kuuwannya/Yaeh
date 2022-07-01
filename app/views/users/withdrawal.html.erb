@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class='col-md-10 offset-md-1 col-lg-8 offset-lg-2'>
+      <h1 class="withdrawal"></h1>
+      <section>
+        <div class="is_attention card mb-4">
+          <div class="card-header text-danger fs-6 fw-bold" style="background-color: #ffeaea;">
+            <i class="fas fa-exclamation-triangle"></i> 退会に関する注意点
+          </div>
+          <ul class="card-body mb-0 text-list">
+            <li class="my-2">退会手続きをされますと、ログインしない使えないサービスがご利用できなくなります。</li>
+            <li class="my-2">退会手続き後、アカウントは完全に削除されるため、再度ログインすることはできなくなります。<br>アカウントに紐付いた全ての情報が削除されるのでご注意ください。</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <div class="text-center">
+      <%= link_to '退会する', user_path(@user), method: :delete, data: { confirm: '本当に退会しますか？' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
