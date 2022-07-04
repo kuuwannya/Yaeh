@@ -19,7 +19,9 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc)
   end
 
-  def edit; end
+  def edit
+    @bikes = Bike.all
+  end
 
   def update
     if @user.update(user_params)
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :profile)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :profile, search_bikes_attributes: [:name], search_bike_ids: [])
     end
 
     def user_find
