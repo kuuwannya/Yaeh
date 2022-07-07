@@ -46,8 +46,8 @@
 企画〜技術調査：4/13 〆切
 <br>ツーリングコースの経路作成・ツーリングコースの距離計測・地図/ルートをSNSに投稿方法
 <br>README〜ER図作成：4/17 〆切
-<br>β版をRUNTEQ内リリース（MVP）：5/15〆切
-<br>本番リリース：5/26
+<br>β版をRUNTEQ内リリース（MVP）
+<br>本番リリース:
 
 ### 画面遷移図
 [Figma](https://www.figma.com/file/Ei8L4672G1G0IP8oYFVh88/Yaeh!?node-id=0%3A1)
