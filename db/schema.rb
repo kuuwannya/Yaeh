@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_29_122357) do
+ActiveRecord::Schema.define(version: 2022_07_04_145059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,10 +45,9 @@ ActiveRecord::Schema.define(version: 2022_06_29_122357) do
 
   create_table "bikes", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "bike_gas_mileage", null: false
-    t.integer "total_distance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_bikes_on_name", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
@@ -81,6 +80,17 @@ ActiveRecord::Schema.define(version: 2022_06_29_122357) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "search_bikes", force: :cascade do |t|
+    t.bigint "bike_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "bike_gas_mileage"
+    t.integer "total_distance"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bike_id"], name: "index_search_bikes_on_bike_id"
+    t.index ["user_id"], name: "index_search_bikes_on_user_id"
   end
 
   create_table "spots", force: :cascade do |t|
@@ -128,5 +138,7 @@ ActiveRecord::Schema.define(version: 2022_06_29_122357) do
   add_foreign_key "post2_spots", "posts"
   add_foreign_key "post2_spots", "spots"
   add_foreign_key "posts", "users"
+  add_foreign_key "search_bikes", "bikes"
+  add_foreign_key "search_bikes", "users"
   add_foreign_key "spots", "users"
 end

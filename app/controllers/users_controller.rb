@@ -19,9 +19,12 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc)
   end
 
-  def edit; end
+  def edit
+    @form = UsersBike.new()
+  end
 
   def update
+    @user = UsersBike.new(users_bikes_params)
     if @user.update(user_params)
       redirect_to user_path(@user), success: t('.success')
     else
@@ -44,6 +47,10 @@ class UsersController < ApplicationController
 
     def user_find
       @user = User.find(current_user.id)
+    end
+
+    def update_params
+      params.require(:user_bike).permit(:name, :email, :password, :password_confirmation, :avatar, :profile, :bike_name).merge(user_id: current_user.id)
     end
 
 end
