@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'search_bike' %>
 <div class="container">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
@@ -34,14 +35,6 @@
         <div class="form-group">
           <%= f.label :profile%>
           <%= f.text_area :profile, class: "form-control"%>
-        </div>
-
-        <div class="check_box">
-          <%= f.collection_check_boxes(:search_bike_ids, @bikes, :id, :name) do |bike| %>
-            <%= bike.label do %>
-              <%= bike.check_box + bike.text  %>
-            <% end %>
-          <% end %>
         </div>
 
         <%= f.submit class: "btn btn-primary" %>

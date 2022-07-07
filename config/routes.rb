@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   delete "logout", to: "user_sessions#destroy"
   get 'terms', to: 'static_pages#terms'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
+  #post 'get_search_bike'
 end
