@@ -11,7 +11,9 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   def create
     @post = current_user.posts.new(post_params)
+    #
     if @post.save
+      #saveメソッド
       #spot = Spot.find(post_params[:spot_ids])
       #spot.update(spot_post_count: Post.where(spot_id: post_params[:spot_id]).count)
       redirect_to posts_path, success: t('.success')
@@ -45,7 +47,7 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date, spot_ids: [], images: [])
+    params.require(:post).permit(:content, :touring_date, images: [])
   end
 
   def find_post

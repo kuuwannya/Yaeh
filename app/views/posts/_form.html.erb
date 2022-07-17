@@ -2,6 +2,7 @@
   <%#= hidden_field_tag :spot_ids, params[:spot_ids], @post.post2_spots.spot_ids %>
   <div class="form-group">
     <%= f.hidden_field 'post[spot_ids][]', value: params[:spot_ids] %>
+    #フォームオブジェクトでやる
   </div>
 
   <div class="form-group">

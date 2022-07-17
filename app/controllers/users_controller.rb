@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @form = UsersBike.new()
+    @bikes = Bike.all
   end
 
   def update

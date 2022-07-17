@@ -113,9 +113,6 @@ function initMap() {
         '</a>' +
         '<p class="mb-0">' + '住所：' + markerData[i]['address'] + '</p>' +
         '<p class="mb-0">' + markerData[i]['spotPostCount'] + '</p>' +
-        `<a href="/posts/new?name=${markerData[i]['name']}&spot_id=${markerData[i]['id']}">` +
-        `投稿` +
-        `</a>` +
         `<form name="newPost" action="/posts/new" method="get">` +
         `<input type="hidden" name="spot_ids" value= "${markerData[i]['id']}" />` +
         `<input type="submit" value="投稿">` +
