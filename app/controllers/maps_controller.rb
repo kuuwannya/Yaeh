@@ -26,15 +26,6 @@ skip_before_action :require_login
     end
   end
 
-  #def attribute
-    #Spot.all.within(search_radius, origin: [@latitude, @longitude]).by_distance(origin: [@latitude, @longitude]).map do |spot|
-      #{id:spot.id,
-      #name: spot.name
-      #count:
-      #}
-    #end
-  #end
-
   def user
     search_radius = 60
     default_lat = 35.6811673
