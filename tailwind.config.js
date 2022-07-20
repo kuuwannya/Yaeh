@@ -1,11 +1,8 @@
 module.exports = {
   content: ["./app/**/*.{html,js}"],
+  darkMode: false,
   theme: {
-    extend: {
-      colors: {
-        accent: '#FFB600',
-      }
-    },
+    extend: {},
   },
   plugins: [],
 }

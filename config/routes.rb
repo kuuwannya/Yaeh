@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   root 'maps#search'
   get 'user_top', to: 'maps#user'
+  get 'index', to: 'maps#index'
   resources :password_resets, only: %i[new create edit update]
 
   resources :spots
