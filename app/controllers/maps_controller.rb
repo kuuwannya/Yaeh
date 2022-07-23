@@ -10,6 +10,8 @@ skip_before_action :require_login
     gon.zoom_level_of_map = 13
     gon.spots_on_map = Spot.all
 
+    @posts = Post.all.includes(:user, :spots).order(created_at: :desc).limit(8)
+
     if params[:q]
       @latitude = geo_params[:latitude].to_f
       @longitude = geo_params[:longitude].to_f
@@ -33,6 +35,9 @@ skip_before_action :require_login
 
     gon.zoom_level_of_map = 13
     gon.spots_on_map = Spot.all
+
+    @posts = Post.all.includes(:user, :spots).order(created_at: :desc).limit(8)
+
 
     if params[:q]
       @latitude = geo_params[:latitude].to_f
