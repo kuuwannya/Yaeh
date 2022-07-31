@@ -1,23 +1,24 @@
 <%= javascript_pack_tag 'google_map' %>
-<input
-      id="pac-input"
-      class="controls"
-      type="text"
-      placeholder="キーワード検索"
-    />
+<section class="relative overflow-hidden">
+  <input
+        id="pac-input"
+        class="controls absolute mt-3 ml-5 px-2.5 py-2.5 rounded-full text-sm text-semibold drop-shadow-lg md:px-5 place-text-center pac-taget-input"
+        type="text"
+        placeholder="キーワード検索"
+      />
+  <div id="gmap_wrapper">
+    <div id="map" class="h-60 w-60 rounded-lg"></div><!-- 地図を表示する div 要素（id="map"）-->
+  </div>
 
-<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
-
-
-<div id="touring-button text-center">
-  <%= form_with scope: :q, url: root_path, method: :get do |f| %>
-    <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
-    <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
-    <%= f.number_field :spot_id, id: 'spot_id', value: '', type: 'hidden' %>
-    <div class="button">
-      <%= f.submit 'ツーリングスポットを探す', class: 'touring-butoon text-black bg-main-blue rounded-full hover:bg-dark-blue font-semibold text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-md cursor-pointer' %>
-    </div>
-  <% end %>
-</div>
-
-<%= render "top" %>
+  <div id="touring-button text-center">
+    <%= form_with scope: :q, url: root_path, method: :get do |f| %>
+      <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
+      <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
+      <%= f.number_field :spot_id, id: 'spot_id', value: '', type: 'hidden' %>
+      <div class="button">
+        <%= f.submit 'ツーリングスポットを探す', class: 'touring-butoon text-black bg-main-blue rounded-full hover:bg-dark-blue font-semibold text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-md cursor-pointer' %>
+      </div>
+    <% end %>
+  </div>
+  <%= render "top" %>
+</section>
