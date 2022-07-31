@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker')
+
 module.exports = environment
 
 function hotfixPostcssLoaderConfig(subloader) {
@@ -15,7 +16,6 @@ function hotfixPostcssLoaderConfig(subloader) {
     }
   }
 }
-
 environment.loaders.keys().forEach(loaderName => {
   const loader = environment.loaders.get(loaderName);
   loader.use.forEach(hotfixPostcssLoaderConfig);
