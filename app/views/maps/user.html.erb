@@ -1,54 +1,56 @@
 <%= javascript_pack_tag 'google_map_route' %>
-<input
-      id="pac-input"
-      class="controls"
-      type="text"
-      placeholder="キーワード検索"
-    />
-<div id="map"></div>
-<form class="w">
-  <div class="start-button text-center">
-    <label class="text"> 出発地 </label>
+<section class="relative overflow-hidden">
+  <input
+        id="pac-input"
+        class="controls absolute mt-3 ml-5 px-2.5 py-2.5 rounded-full text-sm text-semibold drop-shadow-lg md:px-5 place-text-center pac-taget-input"
+        type="text"
+        placeholder="キーワード検索"
+      />
+  <div id="map" class="h-96 w-96 rounded-lg"></div>
+  <form class="w">
+    <div class="start-button text-center">
+      <label class="text"> 出発地 </label>
+      <input
+        type="text"
+        id="data-start-point-name"
+        placeholder="入力してください"
+        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
+        :value="startPositionData.name"
+      />
+    </div>
+  <div class= "text-center">
+    <label class="text"> 到着地 </label>
     <input
       type="text"
-      id="data-start-point-name"
+      id="data-destination-name"
       placeholder="入力してください"
       class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
-      :value="startPositionData.name"
+      :value="destinationPositionData.name"
     />
   </div>
-<div class= "text-center">
-  <label class="text"> 到着地 </label>
-  <input
-    type="text"
-    id="data-destination-name"
-    placeholder="入力してください"
-    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
-    :value="destinationPositionData.name"
-  />
-</div>
-<div class="container mx-auto text-center">
-  <div class="flex flex-col mb-6 mt-6">
-    <div @click="clicked" class="w-fit mx-auto">
-      <button
-        type="button"
-        id="getRoute"
-        class="cursor-pointer rounded-full bg-orange-300 text-center p-2 mb-3"
-      >
-        ルートを検索する
-      </button>
-    </div>
-    <div id="touring-spot-button text-center">
-      <%= form_with scope: :q, url: root_path, method: :get do |f| %>
-        <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
-        <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
-        <%= f.number_field :spot_id, id: 'spot_id', value: '', type: 'hidden' %>
-        <div class="button">
-          <%= f.submit 'ツーリングスポットを探す' %>
-        </div>
-      <% end %>
+  <div class="container mx-auto text-center">
+    <div class="flex flex-col mb-6 mt-6">
+      <div @click="clicked" class="w-fit mx-auto">
+        <button
+          type="button"
+          id="getRoute"
+          class="cursor-pointer rounded-full bg-orange-300 text-center p-2 mb-3"
+        >
+          ルートを検索する
+        </button>
+      </div>
+      <div id="touring-spot-button text-center">
+        <%= form_with scope: :q, url: root_path, method: :get do |f| %>
+          <%= f.number_field :latitude, id: 'lat', step:'0.0000001', value: '', type: 'hidden' %>
+          <%= f.number_field :longitude, id: 'lng', step:'0.0000001', value: '', type: 'hidden' %>
+          <%= f.number_field :spot_id, id: 'spot_id', value: '', type: 'hidden' %>
+          <div class="button">
+            <%= f.submit 'ツーリングスポットを探す' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <%= render "top" %>
