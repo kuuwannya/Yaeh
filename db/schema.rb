@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_04_145059) do
+ActiveRecord::Schema.define(version: 2022_08_04_085412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,17 +82,6 @@ ActiveRecord::Schema.define(version: 2022_07_04_145059) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "search_bikes", force: :cascade do |t|
-    t.bigint "bike_id", null: false
-    t.bigint "user_id", null: false
-    t.integer "bike_gas_mileage"
-    t.integer "total_distance"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["bike_id"], name: "index_search_bikes_on_bike_id"
-    t.index ["user_id"], name: "index_search_bikes_on_user_id"
-  end
-
   create_table "spots", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "longitude", precision: 10, scale: 7, null: false
@@ -131,6 +120,17 @@ ActiveRecord::Schema.define(version: 2022_07_04_145059) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_bikes", force: :cascade do |t|
+    t.bigint "bike_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "bike_gas_mileage"
+    t.integer "total_distance"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bike_id"], name: "index_users_bikes_on_bike_id"
+    t.index ["user_id"], name: "index_users_bikes_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_145059) do
   add_foreign_key "post2_spots", "posts"
   add_foreign_key "post2_spots", "spots"
   add_foreign_key "posts", "users"
-  add_foreign_key "search_bikes", "bikes"
-  add_foreign_key "search_bikes", "users"
   add_foreign_key "spots", "users"
+  add_foreign_key "users_bikes", "bikes"
+  add_foreign_key "users_bikes", "users"
 end
