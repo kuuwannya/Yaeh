@@ -71,7 +71,7 @@
         #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
         #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
         #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
-            color: #000;
+          color: #000;
             /*Set to match the Tailwind colour you want the active one to be */
         }
     </style>
@@ -83,8 +83,12 @@
     <% else %>
       <%= render 'shared/before_login_header' %>
     <% end %>
-    <%= render 'shared/flash_message' %>
-    <%= yield %>
+    <div class="container px-3 md:px-5 py-3 mx-auto">
+      <%= render 'shared/flash_message' %>
+    </div>
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
   <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=<%= Rails.application.credentials[:googlemap][:key] %>&callback=initMap&libraries=places" async defer></script>

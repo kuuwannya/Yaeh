@@ -1,4 +1,13 @@
 const { environment } = require('@rails/webpacker')
+
+const webpack = require('webpack')
+environment.plugins.prepend('Provide',
+  new webpack.ProvidePlugin({
+    $: 'jquery/src/jquery',
+    jQuery: 'jquery/src/jquery'
+  })
+)
+
 module.exports = environment
 
 function hotfixPostcssLoaderConfig(subloader) {
@@ -15,7 +24,6 @@ function hotfixPostcssLoaderConfig(subloader) {
     }
   }
 }
-
 environment.loaders.keys().forEach(loaderName => {
   const loader = environment.loaders.get(loaderName);
   loader.use.forEach(hotfixPostcssLoaderConfig);

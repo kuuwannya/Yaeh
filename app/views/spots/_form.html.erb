@@ -7,37 +7,34 @@
             <div>
               <%= f.label :name %>
               <div class="mt-1">
-                <%= f.text_field :name, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+                <%= f.text_field :name, class: "block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
               </div>
             </div>
             <div>
               <%= f.label :address%>
               <div class="mt-1">
-                <%= f.text_field :address, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+                <%= f.text_field :address, class: "block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
               </div>
             </div>
             <div>
               <%= f.label :prefecture%>
               <div class="mt-1">
-                <%= f.text_field :prefecture, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+                <%= f.text_field :prefecture, class: "block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
               </div>
             </div>
             <div>
-              <%= f.label :place_id%>
               <div class="mt-1">
-                <%= f.text_field :place_id, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+                <%= f.hidden_field :place_id, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
               </div>
             </div>
             <div>
-              <%= f.label :latitude%>
               <div class="mt-1">
-                <%= f.text_field :latitude, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+                <%= f.hidden_field :latitude, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
               </div>
             </div>
             <div>
-              <%= f.label :longitude%>
               <div class="mt-1">
-                <%= f.text_field :longitude, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
+                <%= f.hidden_field :longitude, class: "block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" %>
               </div>
             </div>
             <div>

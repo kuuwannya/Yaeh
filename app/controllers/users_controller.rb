@@ -25,8 +25,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = UsersBike.new(users_bikes_params)
-    if @user.update(user_params)
+    @user = UsersBike.new
+    if @user.update(update_params)
       redirect_to user_path(@user), success: t('.success')
     else
       flash.now[:danger] = t('.fail')
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     end
 
     def update_params
-      params.require(:user_bike).permit(:name, :email, :password, :password_confirmation, :avatar, :profile, :bike_name).merge(user_id: current_user.id)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :profile, :bike_name).merge(user_id: current_user.id)
     end
 
 end
