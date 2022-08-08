@@ -83,10 +83,12 @@
     <% else %>
       <%= render 'shared/before_login_header' %>
     <% end %>
-    <div class="container px-3md:px-5 py-3 mx-auto">
+    <div class="container px-3 md:px-5 py-3 mx-auto">
       <%= render 'shared/flash_message' %>
     </div>
-    <%= yield %>
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
   <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=<%= Rails.application.credentials[:googlemap][:key] %>&callback=initMap&libraries=places" async defer></script>

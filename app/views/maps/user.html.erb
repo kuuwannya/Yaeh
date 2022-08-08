@@ -2,11 +2,13 @@
 <section class="relative overflow-hidden">
   <input
         id="pac-input"
-        class="controls absolute mt-3 ml-5 px-2.5 py-2.5 rounded-full text-sm text-semibold drop-shadow-lg md:px-5 place-text-center pac-taget-input"
+        class="controls absolute mt-3 ml-20 px-5 py-2.5 rounded-full text-sm text-semibold drop-shadow-lg md:px-5 place-text-center z-10"
         type="text"
         placeholder="キーワード検索"
       />
-  <div id="map" class="h-96 w-96 rounded-lg"></div>
+  <div id="gmap_wrapper">
+    <div id="map" class="h-60 w-60 rounded-lg z-0"></div>
+  </div>
   <form class="w">
     <div class="start-button text-center">
       <label class="text"> 出発地 </label>

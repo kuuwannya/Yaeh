@@ -51,6 +51,7 @@ class SpotsController < ApplicationController
 
   private
   def spot_params
+    binding.pry
     params.require(:spot).permit(:name, :address, :place_id, :latitude, :longitude, :prefecture)
   end
 
