@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
+    @bike = @user.bikes
   end
 
   def edit
@@ -25,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = UsersBike.new
     if @user.update(update_params)
       redirect_to user_path(@user), success: t('.success')
     else
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     end
 
     def update_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :profile, :bike_name).merge(user_id: current_user.id)
+      params.require(:user).permit(:name, :email, :avatar, :profile, bike_ids: [])
     end
 
 end

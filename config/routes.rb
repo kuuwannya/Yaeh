@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'bikes/index'
+  get 'bikes/edit'
+  get 'bikes/update'
   get 'static_pages/terms'
   get 'static_pages/privacy_policy'
   mount RailsAdmin::Engine => '//admin', as: 'rails_admin'
