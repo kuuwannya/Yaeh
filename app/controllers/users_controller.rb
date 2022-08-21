@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
-  before_action :user_find, only: %i[edit update destroy withdrawal]
-  skip_before_action :require_login, only: [:new, :create]
+  before_action :user_find, only: %i[destroy withdrawal edit update]
+  skip_before_action :require_login, only: %i[new create edit update destroy]
   def new
     @user = User.new
+    @user.users_bikes.build
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to login_path, success: t('.success')
+      redirect_to login_path, notice: t('.success')
     else
       flash.now[:danger] =  t('.fail')
       render :new
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(update_params)
-      redirect_to user_path(@user), success: t('.success')
+      redirect_to user_path(@user), notice: t('.success')
     else
       flash.now[:danger] = t('.fail')
       render :edit
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :name, :avatar, :profile)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name)
     end
 
     def user_find
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
     end
 
     def update_params
-      params.require(:user).permit(:name, :email, :avatar, :profile, bike_ids: [])
+      params.require(:user).permit(:name, :email, :avatar, :profile, { bike_ids: []})
     end
 
 end
