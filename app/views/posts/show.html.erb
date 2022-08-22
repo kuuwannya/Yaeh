@@ -9,12 +9,17 @@
             <div class='col-md-3'>
               <%#= image_tag @board.board_image.url, class: 'card-img-top img-fluid', size: '300x200' %>
             </div>
-            <%#= @post.spot.name %>
+            <% if @post.spots.present? %>
+              <% @post.spots.each do |spot| %>
+                <%= spot.name %>
+              <% end %>
+            <% end %>
+
             <% if @post.images.attached? %>
               <div>
                 <p>Images:</p>
                 <% @post.images.each do |image| %>
-                <%= image_tag image, width: 300, height: 200 %>
+                  <%= image_tag image, width: 300, height: 200 %>
                 <% end %>
               </div>
             <% end %>

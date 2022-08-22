@@ -1,4 +1,4 @@
-class Post2Spot < ApplicationRecord
+class PostSpot < ApplicationRecord
   belongs_to :post
   belongs_to :spot
   validates :post_id, presence: true

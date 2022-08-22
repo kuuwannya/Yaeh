@@ -1,6 +1,6 @@
 class BikesController < ApplicationController
 
-  def update
+  def show
   end
 
   private
