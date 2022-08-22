@@ -1,24 +1,28 @@
 class PostsController < ApplicationController
-before_action :find_post, only: [:edit, :update, :destroy]
-
+  before_action :post_find, only: %i[destroy edit update]
+  skip_before_action :require_login, only: %i[new create edit update destroy]
   def index
     @posts = Post.all.includes(:user, :spots).order(created_at: :desc)
   end
 
   def new
     @post = Post.new
+    @post.post_spots.build
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    #
+    @post = Post.new(post_params)
     if @post.save
-      #saveメソッド
-      #spot = Spot.find(post_params[:spot_ids])
-      #spot.update(spot_post_count: Post.where(spot_id: post_params[:spot_id]).count)
-      redirect_to posts_path, success: t('.success')
+      #@post_spot = PostSpot.create(post_id: @post, spot_id: params[:spot_ids])
+      @post.spots << post_spots_params[:spot_ids].reject(&:empty?).map{|x| Spot.find(x)}
+      binding.pry
+      #(@post.spots.count).each.do |spot|
+        #spot = Spot.find(spot)
+        #pot.update(spot_post_count: Post.where(spot_id: spot.count)
+      #end
+      redirect_to posts_path, notice: t('.success')
     else
-      flash.now['danger'] = t('.fail')
+      flash.now[:alert] = t('.fail')
       render :new
     end
   end
@@ -32,8 +36,8 @@ before_action :find_post, only: [:edit, :update, :destroy]
   def edit; end
 
   def update
-    if @post.update(post_params)
-      redirect_to @post
+    if @post.update(update_params)
+      redirect_to post_path(@post), notice: t('.success')
     else
       flash.now['danger'] = t('.fail')
       render :edit
@@ -47,10 +51,18 @@ before_action :find_post, only: [:edit, :update, :destroy]
 
   private
   def post_params
-    params.require(:post).permit(:content, :touring_date, images: [])
+    params.require(:post).permit(:content, :touring_date, { images: [] }).merge(user_id: current_user.id)
   end
 
-  def find_post
+  def post_spots_params
+    params.require(:post).permit( { spot_ids: [] })
+  end
+
+  def update_params
+    params.require(:post).permit(:content, :touring_date, { images: [] }, { spot_ids: [] }).merge(user_id: current_user.id)
+  end
+
+  def post_find
     @post = current_user.posts.find(params[:id])
   end
 end

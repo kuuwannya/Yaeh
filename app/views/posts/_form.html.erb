@@ -1,29 +1,39 @@
-<%= form_with model: @post, local: true, class: "new_post" do |f| %>
-  <%#= hidden_field_tag :spot_ids, params[:spot_ids], @post.post2_spots.spot_ids %>
-  <div class="form-group">
-    <%= f.hidden_field 'post[spot_ids][]', value: params[:spot_ids] %>
-    #フォームオブジェクトでやる
+<section class="">
+  <div class=" items-center px-5 py-12 lg:px-20">
+    <div class="flex flex-col w-full max-w-md p-10 mx-auto my-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+      <div class="mt-8">
+        <div class="mt-6">
+          <%= form_with model: @post, local: true, class: "space-y-6" do |f| %>
+            <div>
+              <%= f.label :names %>
+              <div class="mt-1">
+                <%= f.collection_select(:spot_ids, Spot.all, :id, :name, {}, {class:"form-control js-example-basic-multiple block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500",multiple: true, include_hidden: false}) %>
+              </div>
+            </div>
+            <div>
+              <%= f.label :touring_date %>
+              <div class="mt-1">
+                <%= f.date_field :touring_date, class: "block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500", placeholder: "Your Email" %>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <%= f.label :content %>
+              <div class="mt-1">
+                <%= f.text_field :content, class: "block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <%= f.label :images %>
+              <div class="mt-1">
+                <%= f.file_field :images, multiple: true, class: "block w-full px-5 py-3 mb-4 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:border-transparent focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-300 border-gray-500" %>
+              </div>
+            </div>
+            <div>
+              <%= f.submit 'Post', class: "flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 border-gray-500" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-group">
-    <%= f.label :touring_date, class: "spot_touring_date" %>
-    <%= f.date_field :touring_date, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :content, class: "spot_content" %>
-    <%= f.text_field :content, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :images %>
-    <%= f.file_field :images, multiple: true %>
-  </div>
-
-
-  <div class="form-group">
-    <%#= f.label :route_image, class: "spot_touring_date" %>
-    <%#= f.text_field :route_image, class: "form-control" %>
-  </div>
-  <%= f.submit class: "btn btn-primary" %>
-<% end %>
+</section>
